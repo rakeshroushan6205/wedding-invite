@@ -4,14 +4,14 @@
 // ──────────────────────────────────────────────────────────────────────────
 
 export const couple = {
-  groom: 'Rakesh',
-  bride: 'Priya',
-  groomFull: 'Rakesh Sharma',
-  brideFull: 'Priya Mehta',
+  groom: 'Abhinav',
+  bride: 'Gauri',
+  groomFull: 'Abhinav Kumar',
+  brideFull: 'Gauri Kumari',
   weddingDate: '2026-12-12T10:00:00',
   weddingDateDisplay: 'December 12, 2026',
   city: 'Udaipur, Rajasthan',
-  hashtag: '#RakeshWedsPriya',
+  hashtag: '#AbhinavWedsGauri',
 };
 
 export const heroVideo = '/media/video/hero-bg.mp4';
@@ -51,7 +51,7 @@ export const storyTimeline = [
   {
     year: '2019',
     title: 'First Meeting',
-    text: 'A chance introduction at a college friend\u2019s birthday dinner — Rakesh spilled his drink, Priya never let him forget it.',
+    text: 'A chance introduction at a college friend\u2019s birthday dinner — Abhinav spilled his drink, Gauri never let him forget it.',
     photo: 'https://images.unsplash.com/photo-1521543387232-d96323a9e1f7?q=80&w=900&auto=format&fit=crop',
   },
   {
