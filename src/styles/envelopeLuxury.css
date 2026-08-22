@@ -1,0 +1,434 @@
+/* ──────────────────────────────────────────────────────────────────────
+   Luxury Envelope Opening — scoped styles (prefixed `ev-`).
+   Palette: burgundy #24070F / #3A0D18 · champagne #D6B36A / #E5C98A ·
+   ivory #F7F0DF · soft rose glow.
+   ────────────────────────────────────────────────────────────────────── */
+
+.ev-screen {
+  min-height: 100vh;
+  min-height: 100dvh; /* mobile browser chrome aware */
+  padding-top: max(clamp(20px, 4vh, 48px), env(safe-area-inset-top));
+  padding-bottom: max(clamp(20px, 4vh, 48px), env(safe-area-inset-bottom));
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 38%, rgba(122, 52, 66, 0.35) 0%, rgba(58, 13, 24, 0) 60%),
+    linear-gradient(165deg, #24070f 0%, #300b17 48%, #24070f 100%);
+}
+
+/* radial champagne glow behind the envelope */
+.ev-halo {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: min(70vw, 620px);
+  height: min(70vw, 620px);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(214, 179, 106, 0.22) 0%, rgba(214, 179, 106, 0.07) 42%, rgba(214, 179, 106, 0) 70%);
+  filter: blur(10px);
+  will-change: transform;
+}
+
+/* edge vignette */
+.ev-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 120% 100% at 50% 45%, rgba(0, 0, 0, 0) 55%, rgba(12, 2, 5, 0.55) 100%);
+}
+
+/* Fixed celebration layer: corner poppers never participate in layout. */
+.ev-popper-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* floating dust */
+.ev-dust {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(229, 201, 138, 0.8);
+  filter: blur(1px);
+  animation: ev-dust-drift ease-in-out infinite;
+}
+@keyframes ev-dust-drift {
+  0%, 100% { transform: translate3d(0, 0, 0); opacity: 0.1; }
+  50% { transform: translate3d(var(--dx, 14px), var(--dy, -30px), 0); opacity: 0.5; }
+}
+
+/* twinkling gold sparkles */
+.ev-star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: radial-gradient(circle, #f7ecd4 0%, rgba(214, 179, 106, 0) 70%);
+  transform: rotate(45deg);
+  animation: ev-twinkle ease-in-out infinite;
+}
+@keyframes ev-twinkle {
+  0%, 100% { opacity: 0.15; transform: rotate(45deg) scale(0.7); }
+  50% { opacity: 0.9; transform: rotate(45deg) scale(1.25); }
+}
+
+/* ── Date ── */
+.ev-date {
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: 0.5em;
+  text-indent: 0.5em; /* balance the tracking */
+  text-transform: uppercase;
+  color: #e5c98a;
+  text-shadow: 0 0 18px rgba(214, 179, 106, 0.45), 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* ── Envelope construction ── */
+.ev-scene { perspective: 1600px; }
+
+.ev-envelope {
+  position: relative;
+  box-sizing: border-box;
+  max-width: 100%;
+  width: min(500px, 86vw);
+  aspect-ratio: 8 / 5;
+  filter:
+    drop-shadow(0 22px 36px rgba(0, 0, 0, 0.42))
+    drop-shadow(0 5px 12px rgba(0, 0, 0, 0.28));
+}
+
+/* Height-aware scaling — short laptop screens get a slightly more
+   compact envelope + tighter rhythm so the risen invitation always
+   fits inside the viewport (never cropped). */
+@media (max-height: 820px) {
+  .ev-envelope { width: min(440px, 86vw); }
+  .ev-scene { margin-top: 1.5rem !important; }
+  .ev-enter-slot { margin-top: 1.5rem !important; height: 2.75rem !important; }
+  .ev-subtitle { margin-top: 1rem !important; }
+}
+@media (max-height: 720px) {
+  .ev-envelope { width: min(392px, 86vw); }
+  .ev-scene { margin-top: 1.1rem !important; }
+  .ev-enter-slot { margin-top: 1.1rem !important; }
+  .ev-subtitle { margin-top: 0.75rem !important; }
+}
+@media (max-height: 640px) {
+  .ev-envelope { width: min(340px, 88vw); }
+}
+
+/* soft elevation shadow under the envelope */
+.ev-envelope::after {
+  content: '';
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  bottom: -16%;
+  height: 16%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(10, 2, 4, 0.55) 0%, rgba(10, 2, 4, 0) 70%);
+  filter: blur(14px);
+  z-index: -1;
+}
+
+/* warm light spilling out of the opening once the flap lifts */
+.ev-inner-light {
+  position: absolute;
+  left: -16%;
+  right: -16%;
+  top: -22%;
+  height: 64%;
+  z-index: 2;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 82%, rgba(247, 236, 205, 0.85) 0%, rgba(214, 179, 106, 0.4) 36%, rgba(214, 179, 106, 0) 68%);
+  opacity: 0;
+  transition: opacity 900ms cubic-bezier(0.33, 1, 0.68, 1);
+  pointer-events: none;
+}
+.ev-inner-light.on { opacity: 1; }
+
+/* paper texture shared by every envelope layer */
+.ev-paper {
+  background:
+    repeating-linear-gradient(115deg, rgba(120, 84, 40, 0.05) 0 1px, rgba(120, 84, 40, 0) 2px 5px),
+    radial-gradient(ellipse at 30% 18%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 55%),
+    linear-gradient(160deg, #f7f0df 0%, #efdfc0 55%, #e4cfa6 100%);
+}
+.ev-paper-dark {
+  background:
+    repeating-linear-gradient(65deg, rgba(120, 84, 40, 0.06) 0 1px, rgba(120, 84, 40, 0) 2px 5px),
+    radial-gradient(ellipse at 70% 80%, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 60%),
+    linear-gradient(200deg, #f3e9d2 0%, #e9d5ae 55%, #dcc394 100%);
+}
+
+/* envelope interior — what you see through the opening once the
+   flap lifts: lit ivory lining, cavity corner shadows, fine weave */
+.ev-back {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 10px;
+  background:
+    repeating-linear-gradient(90deg, rgba(150, 108, 44, 0.05) 0 7px, rgba(150, 108, 44, 0) 7px 14px),
+    linear-gradient(180deg, #f2e7cd 0%, #ecdab4 34%, #e2cda2 54%, #d8bd90 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(214, 179, 106, 0.75),
+    inset 0 0 26px rgba(120, 84, 40, 0.22);
+}
+.ev-back::before {
+  /* inner walls of the cavity catching shadow at the edges */
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(90deg, rgba(90, 58, 26, 0.30) 0%, rgba(90, 58, 26, 0) 8%),
+    linear-gradient(270deg, rgba(90, 58, 26, 0.30) 0%, rgba(90, 58, 26, 0) 8%),
+    linear-gradient(180deg, rgba(90, 58, 26, 0.25) 0%, rgba(90, 58, 26, 0) 12%),
+    radial-gradient(ellipse at 50% 44%, rgba(255, 246, 222, 0.55) 0%, rgba(255, 246, 222, 0) 62%);
+}
+.ev-back::after {
+  /* fine inner rim visible through the opened mouth */
+  content: '';
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 16%;
+  height: 42%;
+  border-top: 1px solid rgba(150, 108, 44, 0.26);
+  border-left: 1px solid rgba(150, 108, 44, 0.14);
+  border-right: 1px solid rgba(150, 108, 44, 0.14);
+  border-radius: 10px 10px 0 0;
+  opacity: 0;
+  transition: opacity 500ms ease;
+  pointer-events: none;
+}
+.ev-envelope.opened .ev-back::after { opacity: 1; }
+
+/* invitation card — lives fully INSIDE the envelope; nothing pokes out
+   when closed. It becomes visible only by rising above the top edge. */
+.ev-card {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 5%;
+  z-index: 3;
+  height: 90%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+  will-change: transform;
+}
+.ev-card::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  z-index: 1;
+  border: 1px solid rgba(150, 108, 44, 0.45);
+  border-radius: 5px;
+}
+.ev-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0) 32%);
+  pointer-events: none;
+}
+
+/* front pocket — the FULL face of the envelope. Fully opaque, so the
+   invitation card can never be seen while the envelope is closed. */
+.ev-pocket {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 0 1px rgba(214, 179, 106, 0.8),
+    inset 0 -18px 30px rgba(120, 84, 40, 0.18);
+}
+.ev-envelope.opened .ev-pocket {
+  /* Once open, the front pocket becomes a real mouth instead of a
+     flat rectangle. The card remains behind this folded rim. */
+  clip-path: polygon(0 18%, 50% 50%, 100% 18%, 100% 100%, 0 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(214, 179, 106, 0.72),
+    inset 0 -18px 30px rgba(120, 84, 40, 0.16),
+    0 -3px 10px rgba(65, 35, 13, 0.16);
+}
+.ev-pocket::before {
+  /* folded side flaps converging toward the centre */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(24deg, rgba(120, 84, 40, 0.15) 0%, rgba(120, 84, 40, 0) 38%),
+    linear-gradient(-24deg, rgba(120, 84, 40, 0.15) 0%, rgba(120, 84, 40, 0) 38%);
+}
+.ev-pocket::after {
+  /* soft seam shadow where the flap tip rests on the pocket */
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 49%;
+  height: 16px;
+  background: linear-gradient(180deg, rgba(90, 58, 26, 0.20), rgba(90, 58, 26, 0));
+  pointer-events: none;
+}
+.ev-envelope.opened .ev-pocket::after {
+  top: 48%;
+  height: 24px;
+  background: linear-gradient(180deg, rgba(75, 43, 16, 0.25), rgba(90, 58, 26, 0));
+}
+
+/* realistic folded panels — like a real paper envelope front.
+   Each panel is clipped to its triangle and casts a hairline shadow
+   along its folded edge so the construction physically reads. */
+.ev-fold {
+  position: absolute;
+  inset: 0;
+}
+.ev-fold-left {
+  clip-path: polygon(-1% -1%, 51.5% 50%, -1% 101%);
+  background:
+    repeating-linear-gradient(115deg, rgba(120, 84, 40, 0.05) 0 1px, rgba(120, 84, 40, 0) 2px 5px),
+    linear-gradient(250deg, #e6d2a8 0%, #f3e7cb 52%, #ecdfbd 100%);
+  filter: drop-shadow(2.5px 0 3px rgba(90, 58, 26, 0.30));
+}
+.ev-fold-right {
+  clip-path: polygon(101% -1%, 48.5% 50%, 101% 101%);
+  background:
+    repeating-linear-gradient(65deg, rgba(120, 84, 40, 0.05) 0 1px, rgba(120, 84, 40, 0) 2px 5px),
+    linear-gradient(110deg, #e4cfa5 0%, #f1e5c8 52%, #eadcba 100%);
+  filter: drop-shadow(-2.5px 0 3px rgba(90, 58, 26, 0.30));
+}
+.ev-fold-bottom {
+  clip-path: polygon(-1% 101%, 50% 41%, 101% 101%);
+  background:
+    repeating-linear-gradient(90deg, rgba(120, 84, 40, 0.04) 0 1px, rgba(120, 84, 40, 0) 2px 5px),
+    linear-gradient(0deg, #eedeb9 0%, #f5ebd1 46%, #e9d9b2 100%);
+  filter: drop-shadow(0 -3px 4px rgba(90, 58, 26, 0.32));
+}
+
+/* top flap — tip meets the pocket exactly at the envelope's centre */
+.ev-flap {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  transform-origin: top center;
+  border-radius: 10px 10px 0 0;
+  clip-path: polygon(0 0, 100% 0, 50% 50%);
+  box-shadow:
+    inset 0 0 0 1px rgba(214, 179, 106, 0.7),
+    inset 0 -14px 22px rgba(120, 84, 40, 0.22);
+  will-change: transform;
+}
+.ev-flap::before {
+  /* fine diagonal paper grain + gentle sheen (kept dim, never bright) */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(65deg, rgba(120, 84, 40, 0.05) 0 1px, rgba(120, 84, 40, 0) 2px 5px),
+    linear-gradient(172deg, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0) 48%),
+    linear-gradient(200deg, #efe3c6 0%, #e5d0a4 58%, #d9be8e 100%);
+}
+.ev-flap::after {
+  /* patterned champagne liner revealed on the opened (back) side */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(45deg, rgba(150, 108, 44, 0.07) 0 6px, rgba(150, 108, 44, 0) 6px 12px),
+    linear-gradient(358deg, #f1e5c8 0%, #e8d4aa 62%, #ddc494 100%);
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+.ev-flap.opened::after { opacity: 1; }
+
+/* ── Wax seal ──
+   The anchor div owns the centring translate and is NEVER animated, so
+   framer-motion's transforms on the button can never knock the seal off
+   the flap intersection. */
+.ev-seal-anchor {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 8;
+  transform: translate(-50%, -50%);
+}
+.ev-seal {
+  position: relative;
+  width: clamp(64px, 19vw, 84px);
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #e5c98a;
+  background:
+    radial-gradient(circle at 68% 74%, rgba(0, 0, 0, 0.38) 0%, rgba(0, 0, 0, 0) 42%),
+    radial-gradient(circle at 26% 70%, rgba(255, 190, 190, 0.07) 0%, rgba(255, 190, 190, 0) 46%),
+    radial-gradient(circle at 32% 28%, rgba(122, 52, 66, 0.9) 0%, rgba(74, 18, 32, 0.95) 38%, #24070f 100%);
+  border: 2px solid rgba(214, 179, 106, 0.85);
+  box-shadow:
+    inset 0 2px 6px rgba(255, 235, 200, 0.25),
+    inset 0 -6px 12px rgba(0, 0, 0, 0.55),
+    0 10px 24px rgba(0, 0, 0, 0.5),
+    0 2px 6px rgba(0, 0, 0, 0.4),
+    0 0 24px rgba(214, 179, 106, 0.28);
+  animation: ev-seal-breathe 3.4s ease-in-out infinite;
+  transition: box-shadow 350ms ease;
+}
+.ev-seal::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  border: 1px dashed rgba(229, 201, 138, 0.4);
+}
+@keyframes ev-seal-breathe {
+  0%, 100% { box-shadow: inset 0 2px 6px rgba(255,235,200,.25), inset 0 -6px 12px rgba(0,0,0,.55), 0 8px 22px rgba(0,0,0,.5), 0 0 18px rgba(214,179,106,.22); }
+  50% { box-shadow: inset 0 2px 6px rgba(255,235,200,.25), inset 0 -6px 12px rgba(0,0,0,.55), 0 8px 22px rgba(0,0,0,.5), 0 0 34px rgba(214,179,106,.45); }
+}
+
+/* sparkles around the rising card */
+.ev-spark {
+  position: absolute;
+  z-index: 7;
+  width: 5px;
+  height: 5px;
+  background: radial-gradient(circle, #fdf6e3 0%, rgba(214, 179, 106, 0) 72%);
+  animation: ev-spark-pop 1.6s ease-in-out infinite;
+}
+@keyframes ev-spark-pop {
+  0%, 100% { opacity: 0; transform: scale(0.4) rotate(45deg); }
+  50% { opacity: 0.95; transform: scale(1.15) rotate(45deg); }
+}
+
+/* bottom instruction */
+.ev-open-label {
+  font-family: 'Jost', sans-serif;
+  letter-spacing: 0.42em;
+  text-indent: 0.42em;
+  text-transform: uppercase;
+  color: #e5c98a;
+  text-shadow: 0 0 14px rgba(214, 179, 106, 0.35);
+}
+.ev-heartbeat {
+  animation: ev-heartbeat 1.8s cubic-bezier(0.33, 1, 0.68, 1) infinite;
+  display: inline-block;
+}
+@keyframes ev-heartbeat {
+  0%, 100% { transform: scale(1); opacity: 0.75; }
+  14% { transform: scale(1.28); opacity: 1; }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.18); opacity: 0.95; }
+  56% { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ev-dust, .ev-star, .ev-seal, .ev-spark, .ev-heartbeat { animation: none !important; }
+}

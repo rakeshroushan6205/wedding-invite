@@ -1,0 +1,329 @@
+/* ──────────────────────────────────────────────────────────────────────
+   Luxury Cinematic Hero — scoped styles (prefixed `lux-` so nothing here
+   collides with the site-wide classes in index.css). Colors match the
+   creative brief exactly:
+     burgundy gradient #2A0F14 → #3A1822
+     gold               #E7C77B
+     ivory              #FFF8EE
+     button gradient    #D6A84D → #C08A2E
+   ────────────────────────────────────────────────────────────────────── */
+
+.lux-hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(150deg, #2a0f14 0%, #321420 55%, #3a1822 100%);
+}
+
+/* ---------- Background photo + vignette + fog ---------- */
+
+.lux-photo-layer {
+  position: absolute;
+  inset: -2%;
+  overflow: hidden;
+}
+
+.lux-photo-layer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 48%;
+  filter: saturate(1.05) brightness(1);
+  opacity: 0.62;
+  transform: scale(1.02);
+  animation: lux-kenburns 42s ease-in-out infinite alternate;
+}
+
+.lux-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 62% 58% at 50% 46%, rgba(20, 7, 10, 0.58) 0%, rgba(20, 7, 10, 0.32) 45%, rgba(20, 7, 10, 0) 78%),
+    linear-gradient(180deg, rgba(20, 7, 10, 0.4) 0%, rgba(20, 7, 10, 0) 16%, rgba(20, 7, 10, 0) 68%, rgba(16, 5, 8, 0.55) 100%);
+}
+
+.lux-fog {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  bottom: -4%;
+  height: 30%;
+  background: linear-gradient(to top, rgba(58, 24, 34, 0.92) 0%, rgba(58, 24, 34, 0.35) 55%, rgba(58, 24, 34, 0) 100%);
+  filter: blur(7px);
+  animation: lux-fog-drift 24s ease-in-out infinite;
+}
+
+/* ---------- Volumetric light rays + lens flares ---------- */
+
+.lux-rays {
+  position: absolute;
+  inset: -15% -20% 0 -20%;
+  background: conic-gradient(
+    from 205deg at 50% -10%,
+    rgba(231, 199, 123, 0) 0deg,
+    rgba(231, 199, 123, 0.16) 8deg,
+    rgba(231, 199, 123, 0) 22deg,
+    rgba(231, 199, 123, 0) 150deg,
+    rgba(231, 199, 123, 0.1) 167deg,
+    rgba(231, 199, 123, 0) 182deg
+  );
+  mix-blend-mode: screen;
+  animation: lux-ray-sweep 26s ease-in-out infinite;
+}
+
+.lux-flare {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 244, 214, 0.55), rgba(231, 199, 123, 0) 70%);
+  mix-blend-mode: screen;
+  animation: lux-flare-pulse ease-in-out infinite;
+}
+
+/* ---------- Bokeh / dust / fireflies ---------- */
+
+.lux-bokeh {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(2px);
+  mix-blend-mode: screen;
+  animation-name: lux-bokeh-drift;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.lux-dust {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffeac0 0%, rgba(231, 199, 123, 0) 72%);
+  animation-name: lux-dust-float;
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
+}
+
+.lux-firefly {
+  position: absolute;
+  border-radius: 50%;
+  background: #fff3d6;
+  box-shadow: 0 0 6px 2px rgba(255, 243, 214, 0.9), 0 0 16px 6px rgba(231, 199, 123, 0.5);
+  animation-name: lux-firefly;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* ---------- Glass gold spheres + diamond crystals ---------- */
+
+.lux-sphere-wrap {
+  position: absolute;
+}
+
+.lux-sphere {
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 32% 26%,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 236, 196, 0.55) 16%,
+    rgba(231, 199, 123, 0.32) 42%,
+    rgba(160, 110, 40, 0.22) 72%,
+    rgba(70, 42, 16, 0.16) 100%
+  );
+  box-shadow: inset 0 0 16px rgba(255, 255, 255, 0.35), inset 0 -10px 18px rgba(70, 35, 10, 0.25), 0 0 26px rgba(231, 199, 123, 0.32);
+  animation-name: lux-sphere-float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.lux-crystal-wrap {
+  position: absolute;
+  animation-name: lux-crystal-twinkle;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.lux-crystal {
+  width: 100%;
+  height: 100%;
+  transform: rotate(45deg);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(231, 199, 123, 0.55) 50%, rgba(255, 255, 255, 0.85));
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.5), 0 0 22px rgba(231, 199, 123, 0.4);
+}
+
+/* ---------- Light ribbons ---------- */
+
+.lux-ribbon-path {
+  animation: lux-ribbon-flow 7s linear infinite;
+}
+
+.lux-ribbon-spark {
+  animation: lux-spark-travel linear infinite;
+}
+
+/* ---------- Sakura flowers ---------- */
+
+.lux-sakura {
+  filter: drop-shadow(0 2px 6px rgba(20, 6, 9, 0.45));
+  animation-name: lux-sway;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+/* ---------- Typography ---------- */
+
+.lux-eyebrow {
+  font-family: 'Jost', sans-serif;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  font-size: clamp(0.6rem, 1.4vw, 0.78rem);
+  font-weight: 500;
+  color: #e7c77b;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 18px rgba(231, 199, 123, 0.45);
+}
+
+.lux-names {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  color: #fff8ee;
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.65),
+    0 1px 0 rgba(0, 0, 0, 0.55),
+    0 0 1px rgba(255, 248, 238, 0.6),
+    0 0 30px rgba(231, 199, 123, 0.35),
+    0 0 64px rgba(231, 199, 123, 0.18);
+}
+
+.lux-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: #f3e6d8;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+}
+
+/* ---------- Heart ---------- */
+
+.lux-heart {
+  animation: lux-heart-pulse 2.6s ease-in-out infinite;
+  transform-origin: center;
+  filter: drop-shadow(0 0 14px rgba(255, 122, 168, 0.65)) drop-shadow(0 0 30px rgba(255, 122, 168, 0.3));
+}
+
+/* ---------- Date pill ---------- */
+
+.lux-pill {
+  background: rgba(20, 7, 10, 0.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(231, 199, 123, 0.5);
+  box-shadow: 0 0 30px -6px rgba(231, 199, 123, 0.25), inset 0 0 18px rgba(231, 199, 123, 0.06);
+}
+
+/* ---------- CTA button ---------- */
+
+.lux-btn {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #d6a84d 0%, #c08a2e 60%, #a9761e 100%);
+  color: #241009;
+  box-shadow: 0 14px 32px -10px rgba(192, 138, 46, 0.65);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.lux-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, 0.55) 48%, transparent 66%);
+  background-size: 220% 100%;
+  background-position: -150% 0;
+  animation: lux-shimmer-sweep 3.2s ease-in-out infinite;
+  mix-blend-mode: overlay;
+}
+
+.lux-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 42px -10px rgba(192, 138, 46, 0.85), 0 0 30px rgba(231, 199, 123, 0.4);
+}
+
+/* ---------- Scroll cue ---------- */
+
+.lux-scrollcue {
+  color: rgba(231, 199, 123, 0.8);
+}
+
+/* ──────────────────────────────────────────────────────────────────────
+   Keyframes
+   ────────────────────────────────────────────────────────────────────── */
+
+@keyframes lux-kenburns {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.12) translate(-1%, -1%); }
+}
+
+@keyframes lux-ray-sweep {
+  0%, 100% { transform: rotate(-5deg); opacity: 0.55; }
+  50% { transform: rotate(3deg); opacity: 0.85; }
+}
+
+@keyframes lux-fog-drift {
+  0%, 100% { transform: translateX(-2%); }
+  50% { transform: translateX(2%); }
+}
+
+@keyframes lux-flare-pulse {
+  0%, 100% { opacity: 0.22; transform: scale(1); }
+  50% { opacity: 0.42; transform: scale(1.08); }
+}
+
+@keyframes lux-bokeh-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(var(--dx, 18px), var(--dy, -26px), 0) scale(1.14); }
+}
+
+@keyframes lux-dust-float {
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
+  12% { opacity: var(--dust-op, 0.8); }
+  85% { opacity: var(--dust-op, 0.8); }
+  100% { transform: translate3d(var(--dx, 12px), -140px, 0); opacity: 0; }
+}
+
+@keyframes lux-firefly {
+  0%, 100% { transform: translate3d(0, 0, 0); opacity: 0.25; }
+  25% { transform: translate3d(16px, -20px, 0); opacity: 1; }
+  50% { transform: translate3d(-12px, -34px, 0); opacity: 0.45; }
+  75% { transform: translate3d(-20px, -8px, 0); opacity: 1; }
+}
+
+@keyframes lux-sphere-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-16px) rotate(10deg); }
+}
+
+@keyframes lux-crystal-twinkle {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.18); }
+}
+
+@keyframes lux-ribbon-flow {
+  to { stroke-dashoffset: -400; }
+}
+
+@keyframes lux-spark-travel {
+  0% { offset-distance: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+@keyframes lux-sway {
+  0%, 100% { transform: rotate(-4deg) translateY(0); }
+  50% { transform: rotate(4deg) translateY(-6px); }
+}
+
+@keyframes lux-heart-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+
+@keyframes lux-shimmer-sweep {
+  0% { background-position: -150% 0; }
+  100% { background-position: 250% 0; }
+}

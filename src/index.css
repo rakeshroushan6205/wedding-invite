@@ -1,0 +1,166 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: #FBF6EC;
+  color: #2B0A12;
+  font-family: 'Jost', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Fixed navbar height offset so anchored sections don't hide their
+   headings underneath it when jumped to from the menu. */
+section[id], footer[id] {
+  scroll-margin-top: 76px;
+}
+
+/* Elegant gold focus ring for keyboard / assistive-tech users */
+:focus-visible {
+  outline: 2px solid #E6C887;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: #C8983E;
+  color: #FBF6EC;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FBF6EC;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #E6C887, #C8983E);
+  border-radius: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer utilities {
+  .container-px {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-py {
+    @apply py-16 sm:py-20 md:py-24 lg:py-32;
+  }
+}
+
+@layer components {
+  .glass-card {
+    background: rgba(251, 246, 236, 0.55);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(200, 152, 62, 0.35);
+  }
+
+  .glass-card-dark {
+    background: rgba(43, 10, 18, 0.55);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(230, 200, 135, 0.18);
+  }
+
+  .gold-text {
+    background: linear-gradient(110deg, #9C7228 10%, #E6C887 35%, #FBF6EC 50%, #E6C887 65%, #9C7228 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 200% 100%;
+  }
+
+  .eyebrow {
+    font-family: 'Jost', sans-serif;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    font-size: clamp(0.6rem, 1.5vw, 0.7rem);
+    font-weight: 500;
+  }
+
+  .section-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+  }
+
+  .ring-divider {
+    width: clamp(40px, 5vw, 56px);
+    height: clamp(40px, 5vw, 56px);
+  }
+
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 sm:px-8 font-body text-xs sm:text-sm uppercase tracking-[0.2em] transition-all duration-300;
+    min-height: 44px;
+    min-width: 44px;
+    background: linear-gradient(135deg, #E6C887, #C8983E 55%, #9C7228);
+    color: #2B0A12;
+    box-shadow: 0 10px 30px -8px rgba(200, 152, 62, 0.6);
+  }
+  .btn-gold:hover {
+    box-shadow: 0 14px 36px -6px rgba(200, 152, 62, 0.85);
+    transform: translateY(-2px);
+  }
+
+  .btn-outline-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border px-5 py-3 sm:px-8 font-body text-xs sm:text-sm uppercase tracking-[0.2em] transition-all duration-300;
+    min-height: 44px;
+    min-width: 44px;
+    border-color: rgba(200, 152, 62, 0.6);
+    color: #C8983E;
+  }
+  .btn-outline-gold:hover {
+    background: rgba(200, 152, 62, 0.12);
+  }
+}
+
+/* Heart-trail cursor particle */
+.heart-trail {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  user-select: none;
+  will-change: transform, opacity;
+}
+@media (max-width: 639px) {
+  .mobile-chat-control {
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    left: max(0.75rem, env(safe-area-inset-left));
+  }
+
+  .mobile-music-control {
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    right: max(0.75rem, env(safe-area-inset-right));
+  }
+}
