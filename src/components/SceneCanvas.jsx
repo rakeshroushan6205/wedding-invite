@@ -334,10 +334,6 @@ function SceneContents({ controls, moodData, reduced = false }) {
       )}
 
       <WeddingArch />
-      <InterlockedRings position={[0, 1.1, -1.8]} scale={1.2} />
-      <GlowRing position={[-2.6, 0.8, -1]} scale={0.75} speed={0.8} />
-      <GlowRing position={[2.8, -0.6, -1.8]} scale={0.85} speed={1.1} color="#D9A8A0" />
-      <GlowRing position={[0.5, 2.1, -3.2]} scale={1.15} speed={0.6} />
       {!reduced && (
         <>
           <Diamond position={[-1.7, -1, 0.8]} speed={1.4} scale={0.3} />

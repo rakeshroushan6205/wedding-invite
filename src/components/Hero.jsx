@@ -67,30 +67,6 @@ function HeartCrystal({ className = '' }) {
   )
 }
 
-// Interlocked wedding-ring crest shown above the names, so the ring motif is
-// visible even though this opaque hero covers the 3D canvas behind it.
-function RingCrest() {
-  return (
-    <svg
-      viewBox="0 0 120 72"
-      className="h-14 w-24 sm:h-16 sm:w-28"
-      aria-hidden="true"
-    >
-      <defs>
-        <linearGradient id="ringGold" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#F6E3AE" />
-          <stop offset="55%" stopColor="#E6C887" />
-          <stop offset="100%" stopColor="#C08A2E" />
-        </linearGradient>
-      </defs>
-      <circle cx="45" cy="40" r="22" fill="none" stroke="url(#ringGold)" strokeWidth="4" style={{ filter: 'drop-shadow(0 0 6px rgba(231,199,123,0.65))' }} />
-      <circle cx="75" cy="40" r="22" fill="none" stroke="url(#ringGold)" strokeWidth="4" opacity="0.92" style={{ filter: 'drop-shadow(0 0 6px rgba(217,168,160,0.55))' }} />
-      <circle cx="60" cy="15" r="4" fill="#FBF6EC" style={{ filter: 'drop-shadow(0 0 8px rgba(251,246,236,0.95))' }} />
-      <circle cx="60" cy="15" r="7" fill="none" stroke="#F6E3AE" strokeWidth="1" opacity="0.7" />
-    </svg>
-  )
-}
-
 /**
  * Full-screen, self-contained cinematic title hero. Deliberately opaque
  * (its own burgundy/gold backdrop) rather than translucent over the global
@@ -234,8 +210,6 @@ export default function Hero() {
 
       {/* Foreground content */}
       <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center px-5 text-center sm:px-6">
-        <RingCrest />
-
         <motion.p
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}

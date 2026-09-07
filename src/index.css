@@ -25,6 +25,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Use the visible viewport on mobile browsers instead of the viewport
+   height that includes the browser's hidden address bars. */
+@supports (height: 100dvh) {
+  .min-h-screen {
+    min-height: 100dvh;
+  }
+}
+
 img, video, iframe {
   max-width: 100%;
   height: auto;

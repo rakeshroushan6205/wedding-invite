@@ -6,20 +6,17 @@
 export const couple = {
   groom: 'Abhinav',
   bride: 'Gauri',
-  groomFull: 'Abhinav Kumar',
-  brideFull: 'Gauri Kumari',
-  weddingDate: '2026-12-12T10:00:00',
-  weddingDateDisplay: 'December 12, 2026',
-  city: 'Udaipur, Rajasthan',
+groomFull: 'Abhinav Kumar',
+  brideFull: 'Gauri Kushwaha',
+  weddingDate: '2026-11-26T10:00:00',
+  weddingDateDisplay: 'November 26, 2026', 
+  city: 'Bhagalpur, Bihar',
   hashtag: '#AbhinavWedsGauri',
 };
 
 export const heroVideo = '/media/video/hero-bg.mp4';
-// Fallback poster shown while the video loads / if none is supplied.
-// Drop your own couple photo at /media/couple/hero-couple.jpg and point
-// this at '/media/couple/hero-couple.jpg' to use it instead.
-export const heroPoster =
-  'https://images.unsplash.com/photo-1721635513002-287a3a3b2fa1?q=80&w=1920&auto=format&fit=crop';
+// Background photo used behind the website content.
+export const heroPoster = '/media/couple/Couple Photo_3_Background.png';
 
 export const music = {
   src: '/audio/wedding-theme.mp3',
@@ -29,19 +26,19 @@ export const music = {
 export const familyIntro = {
   bride: {
     title: "The Bride's Family",
-    parents: 'Daughter of Mr. Anil Mehta & Mrs. Sunita Mehta',
+    parents: 'Daughter of Mr. Dhaneshwar Pd Singh & Mrs. Rukmani Devi',
     members: [
-      { name: 'Anil Mehta', relation: 'Father', photo: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=600&auto=format&fit=crop' },
-      { name: 'Sunita Mehta', relation: 'Mother', photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop' },
+      { name: 'Dhaneshwar Pd Singh', relation: 'Father', photo: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=600&auto=format&fit=crop' },
+      { name: 'Rukmani Devi', relation: 'Mother', photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop' },
       { name: 'Aanya Mehta', relation: 'Sister', photo: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=600&auto=format&fit=crop' },
     ],
   },
   groom: {
     title: "The Groom's Family",
-    parents: 'Son of Mr. Vinod Sharma & Mrs. Kavita Sharma',
+    parents: 'Son of Mr. Bhola Pd. Mandal & Mrs. Archana Kumari',
     members: [
-      { name: 'Vinod Sharma', relation: 'Father', photo: 'https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?q=80&w=600&auto=format&fit=crop' },
-      { name: 'Kavita Sharma', relation: 'Mother', photo: 'https://images.unsplash.com/photo-1581065178026-390bc4e78dad?q=80&w=600&auto=format&fit=crop' },
+      { name: 'Bhola Pd. Mandal', relation: 'Father', photo: 'https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?q=80&w=600&auto=format&fit=crop' },
+      { name: 'Archana Kumari', relation: 'Mother', photo: 'https://images.unsplash.com/photo-1581065178026-390bc4e78dad?q=80&w=600&auto=format&fit=crop' },
       { name: 'Arjun Sharma', relation: 'Brother', photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=600&auto=format&fit=crop' },
     ],
   },
@@ -83,47 +80,47 @@ export const storyTimeline = [
 export const events = [
   {
     name: 'Mehendi',
-    date: 'Dec 9, 2026',
-    time: '4:00 PM – 8:00 PM',
-    venue: 'Rambagh Lawns, Udaipur',
+    date: 'Nov 24, 2026',
+    time: '5:00 PM – 8:00 PM',
+    venue: 'Hassanganj Road Mirjanhat Bhagalpur, Bihar',
     note: 'Colors & traditional attire encouraged',
   },
   {
     name: 'Haldi',
-    date: 'Dec 10, 2026',
-    time: '10:00 AM – 1:00 PM',
-    venue: 'Family Residence, Udaipur',
+    date: 'Nov 24, 2026',
+    time: '11:00 AM – 3:00 PM',
+    venue: 'Hassanganj Road Mirjanhat Bhagalpur, Bihar',
     note: 'Wear yellow — things will get messy',
   },
   {
-    name: 'Sangeet',
-    date: 'Dec 10, 2026',
-    time: '7:00 PM – 11:00 PM',
-    venue: 'The Leela Palace, Udaipur',
+    name: 'Mandap Pujan',
+    date: 'Nov 25, 2026',
+    time: '6:00 PM – 11:00 PM',
+    venue: 'Hassanganj Road Mirjanhat Bhagalpur, Bihar',
     note: 'Festive evening wear',
   },
   {
-    name: 'Wedding Ceremony',
-    date: 'Dec 12, 2026',
-    time: '7:30 PM onward',
-    venue: 'Lake Pichola Lawns, Udaipur',
-    note: 'Traditional ceremonial attire',
-  },
-  {
-    name: 'Reception',
-    date: 'Dec 13, 2026',
+    name: 'Barat Departure',
+    date: 'Nov 26, 2026',
     time: '7:00 PM – 11:00 PM',
-    venue: 'The Leela Palace, Udaipur',
-    note: 'Black tie / Indo-western',
+    venue: 'Hassanganj Road Mirjanhat Bhagalpur, Bihar',
+    note: 'Traditional / Indo-western attire',
   },
+   {
+    name: 'Wedding Ceremony & Dinner',
+    date: 'Nov 26, 2026',
+    time: '9:30 PM onward',
+    venue: 'AmlaDev Palace, Mirjanhat, Bhagalpur, Bihar',
+    note: 'Traditional ceremonial attire',
+  }
 ];
 
 export const venue = {
-  name: 'The Leela Palace, Udaipur',
-  address: 'Lake Pichola, Udaipur, Rajasthan 313001, India',
+  name: 'AmlaDev Palace',
+  address: 'Mirjanhat, Bhagalpur, Bihar 812005, India',
   mapEmbed:
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3673.0!2d73.6862!3d24.5841!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDM1JzAyLjgiTiA3M8KwNDEnMTAuMyJF!5e0!3m2!1sen!2sin!4v1700000000000',
-  mapsLink: 'https://maps.google.com/?q=The+Leela+Palace+Udaipur',
+    'https://maps.google.com/?q=AmlaDev+Palace+Mirjanhat+Bhagalpur+Bihar&output=embed`',
+  mapsLink: 'https://maps.google.com/?q=AmlaDev+Palace+Mirjanhat+Bhagalpur+Bihar',
   photo: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=1400&auto=format&fit=crop',
 };
 
@@ -191,7 +188,7 @@ export const contact = {
 export const faqs = [
   { q: 'What time does the wedding ceremony start?', a: 'The wedding ceremony begins at 7:30 PM on December 12, 2026, at Lake Pichola Lawns, Udaipur.' },
   { q: 'What is the dress code?', a: 'Mehendi & Sangeet are festive ethnic wear, Haldi is casual yellow, the Wedding Ceremony calls for traditional attire, and the Reception is black tie / Indo-western.' },
-  { q: 'Where is the venue?', a: 'The main ceremony and reception are at The Leela Palace, Udaipur, on the banks of Lake Pichola.' },
+  { q: 'Where is the venue?', a: 'The main ceremony and reception are at AmlaDev Palace, Mirjanhat, Bhagalpur, Bihar.' },
   { q: 'Who can I contact for help?', a: 'You can reach the groom\u2019s side at +91 98765 43210 or the bride\u2019s side at +91 91234 56789.' },
   { q: 'Is there parking / transport available?', a: 'Valet parking is available at the venue, and shuttles will run from partner hotels — details will be shared closer to the date.' },
 ];

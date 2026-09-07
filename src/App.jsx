@@ -45,7 +45,7 @@ function MainPage() {
           src={heroPoster}
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover opacity-[0.95]"
+          className="absolute inset-0 h-full w-full object-cover opacity-[0.95] sm:object-contain"
           style={{ objectPosition: 'center 48%' }}
         />
         <div

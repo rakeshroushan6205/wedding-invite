@@ -11,6 +11,8 @@
   padding-bottom: max(clamp(20px, 4vh, 48px), env(safe-area-inset-bottom));
   background:
     radial-gradient(ellipse 90% 60% at 50% 38%, rgba(122, 52, 66, 0.35) 0%, rgba(58, 13, 24, 0) 60%),
+    linear-gradient(165deg, rgba(36, 7, 15, 0.86) 0%, rgba(48, 11, 23, 0.78) 48%, rgba(36, 7, 15, 0.88) 100%),
+    url('/media/couple/Couple%20Photo_3_Background.png') center / auto 88% no-repeat,
     linear-gradient(165deg, #24070f 0%, #300b17 48%, #24070f 100%);
 }
 
