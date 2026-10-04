@@ -121,10 +121,14 @@ export default function LoadingEnvelope({ onEnter, onMusicStart }) {
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2)
-      canvas.width = Math.floor(window.innerWidth * dpr)
-      canvas.height = Math.floor(window.innerHeight * dpr)
-      canvas.style.width = `${window.innerWidth}px`
-      canvas.style.height = `${window.innerHeight}px`
+      // Use the canvas box rather than window.innerWidth. Mobile browsers can
+      // briefly report a stale viewport while their browser chrome settles.
+      const width = canvas.clientWidth || window.innerWidth
+      const height = canvas.clientHeight || window.innerHeight
+      canvas.width = Math.floor(width * dpr)
+      canvas.height = Math.floor(height * dpr)
+      canvas.style.width = '100%'
+      canvas.style.height = '100%'
       canvas.getContext('2d')?.setTransform(dpr, 0, 0, dpr, 0, 0)
     }
 
@@ -145,8 +149,8 @@ export default function LoadingEnvelope({ onEnter, onMusicStart }) {
     const canvas = popperCanvasRef.current
     if (!canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-    const width = window.innerWidth
-    const height = window.innerHeight
+    const width = canvas.clientWidth || window.innerWidth
+    const height = canvas.clientHeight || window.innerHeight
     const mobile = width < 640
     const count = mobile ? 42 : 78
     const particles = []
@@ -216,8 +220,8 @@ export default function LoadingEnvelope({ onEnter, onMusicStart }) {
     if (!ctx) return
 
     const animate = () => {
-      const frameWidth = window.innerWidth
-      const frameHeight = window.innerHeight
+      const frameWidth = canvas.clientWidth || window.innerWidth
+      const frameHeight = canvas.clientHeight || window.innerHeight
       ctx.clearRect(0, 0, frameWidth, frameHeight)
 
       const active = popperParticlesRef.current.filter((particle) => particle.age < particle.life)
@@ -349,7 +353,7 @@ export default function LoadingEnvelope({ onEnter, onMusicStart }) {
         transition={{ duration: 0.6, ease: EASE_LUX }}
       >
         <motion.p {...fade(0.25)} className="ev-date text-[clamp(0.8rem,2.6vw,1.05rem)] font-medium">
-          December 12, 2026
+           26 November 2026
         </motion.p>
         <motion.div {...fade(0.4)} className="mt-3 flex items-center gap-3" aria-hidden="true">
           <span className="h-px w-10 bg-gradient-to-r from-transparent to-[#D6B36A]/70 sm:w-16" />
@@ -398,7 +402,7 @@ export default function LoadingEnvelope({ onEnter, onMusicStart }) {
               </p>
               <span className="mx-auto my-[3%] block h-px w-[38%] bg-gradient-to-r from-transparent via-gold to-transparent" />
               <p className="font-body text-[clamp(0.44rem,1.6vw,0.62rem)] tracking-[0.34em] text-bronze/85">
-                12 &bull; 12 &bull; 2026
+                 26 &bull; 11 &bull; 2026
               </p>
             </motion.div>
 
@@ -467,7 +471,7 @@ export default function LoadingEnvelope({ onEnter, onMusicStart }) {
                   aria-label="Open the invitation"
                 >
                   <span className="section-heading flex items-center gap-[0.18em] text-[clamp(0.95rem,3vw,1.2rem)] leading-none">
-                    R<span className="text-[0.68em]">&hearts;</span>P
+                     A<span className="text-[0.68em]">&hearts;</span>G
                   </span>
                   <span className="font-body text-[7px] tracking-[0.32em] text-[#e5c98a]/85">OPEN</span>
                 </motion.button>

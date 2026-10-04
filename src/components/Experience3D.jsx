@@ -4,7 +4,7 @@ import SectionDivider from './SectionDivider'
 import { carouselPhotos } from '../data/weddingData'
 
 const IMAGES = carouselPhotos.slice(0, 7)
-const INTERVAL_MS = 2000
+const INTERVAL_MS = 3000
 const ARC_ANGLE = 0.35
 
 function getDimensions() {

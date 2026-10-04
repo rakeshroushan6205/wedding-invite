@@ -1,18 +1,15 @@
 import { motion } from 'framer-motion'
-import {
-  HiOutlineSparkles,
-  HiOutlineSun,
-  HiOutlineMusicNote,
-  HiOutlineHeart,
-  HiOutlineGift,
-  HiOutlineCalendar,
-  HiOutlineClock,
-  HiOutlineLocationMarker,
-} from 'react-icons/hi'
+import { HiOutlineCalendar, HiOutlineClock, HiOutlineLocationMarker } from 'react-icons/hi'
 import { events } from '../data/weddingData'
 import SectionDivider from './SectionDivider'
 
-const ICONS = [HiOutlineSparkles, HiOutlineSun, HiOutlineMusicNote, HiOutlineHeart, HiOutlineGift]
+const ICONS = {
+  Mehendi: '/media/gallery/icon/Mehendi.png',
+  Haldi: '/media/gallery/icon/Haldi.png',
+  'Mandap Pujan': '/media/gallery/icon/Mandap%20Pujan.png',
+  'Barat Departure': '/media/gallery/icon/Barat%20Departure.png',
+  'Wedding Ceremony & Dinner': '/media/gallery/icon/Wedding-Ceremony-Dinner.png',
+}
 
 export default function EventSchedule() {
   return (
@@ -25,7 +22,7 @@ export default function EventSchedule() {
 
       <div className="mx-auto mt-10 sm:mt-16 grid max-w-6xl gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {events.map((ev, i) => {
-          const Icon = ICONS[i % ICONS.length]
+          const icon = ICONS[ev.name]
           return (
             <motion.div
               key={ev.name}
@@ -43,7 +40,7 @@ export default function EventSchedule() {
               />
               <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-gold/10" />
               <div className="flex h-12 w-12 items-center justify-center rounded-full border border-gold/40 bg-gradient-to-br from-gold/20 to-rosegold/10 shadow-gold">
-                <Icon className="text-xl sm:text-2xl text-gold" />
+                <img src={icon} alt="" className="h-9 w-9 object-contain" loading="lazy" />
               </div>
               <h3 className="section-heading mt-4 text-xl sm:text-2xl text-maroon">{ev.name}</h3>
 

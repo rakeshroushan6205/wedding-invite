@@ -24,14 +24,14 @@ import VideoShowcase from './components/VideoShowcase'
 import InvitationPage from './components/InvitationPage'
 import useSceneControls from './hooks/useSceneControls'
 import useActiveSection from './hooks/useActiveSection'
-import useRomanticMusic from './hooks/useRomanticMusic'
-import { couple, heroPoster } from './data/weddingData'
+import useBackgroundMusic from './hooks/useBackgroundMusic'
+import { couple, heroPoster, music as musicTrack } from './data/weddingData'
 
 function MainPage() {
   const location = useLocation()
   const sceneControls = useSceneControls()
   const activeSection = useActiveSection()
-  const music = useRomanticMusic()
+  const music = useBackgroundMusic(musicTrack.src)
   const [entered, setEntered] = useState(location.state?.skipEnvelope || false)
 
   if (!entered) {

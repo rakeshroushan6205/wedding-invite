@@ -75,16 +75,25 @@ export default function Venue() {
         transition={{ duration: 0.7, delay: 0.15 }}
         className="mx-auto mt-6 sm:mt-8 max-w-5xl overflow-hidden rounded-3xl shadow-luxury"
       >
-        <iframe
-          title="Venue map"
-          src={venue.mapEmbed}
-          width="100%"
-          height="280"
-          style={{ border: 0 }}
-          loading="lazy"
-          allowFullScreen
-          className="sm:h-[380px]"
-        />
+        <div className="relative">
+          <iframe
+            title="Venue map"
+            src={venue.mapEmbed}
+            width="100%"
+            height="280"
+            style={{ border: 0 }}
+            loading="lazy"
+            allowFullScreen
+            className="pointer-events-none block sm:h-[380px]"
+          />
+          <a
+            href={venue.mapsLink}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`Open ${venue.name} in Google Maps`}
+            className="absolute inset-0 z-10"
+          />
+        </div>
       </motion.div>
     </section>
   )

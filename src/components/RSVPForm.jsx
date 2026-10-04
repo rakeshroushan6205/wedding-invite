@@ -135,7 +135,7 @@ export default function RSVPForm() {
                   type="tel"
                   inputMode="numeric"
                   className="mt-2 w-full rounded-lg border border-gold/30 bg-ivory/5 px-4 py-3 min-h-[44px] font-body text-ivory placeholder:text-ivory/40 focus:border-gold focus:outline-none"
-                  placeholder="+91 98765 43210"
+                  placeholder="+91 70043 63651"
                 />
                 {errors.mobile && <p className="mt-1 text-xs text-rosegold-light">{errors.mobile}</p>}
               </div>

@@ -8,24 +8,24 @@ function FamilyColumn({ data, align }) {
       <h3 className="section-heading text-2xl text-maroon">{data.title}</h3>
       <p className="mt-1 font-display text-sm italic text-bronze/80">{data.parents}</p>
 
-      <div className={`mt-6 flex flex-wrap gap-4 ${align === 'right' ? 'justify-end' : 'justify-start'}`}>
-        {data.members.map((m, i) => (
-          <motion.div
-            key={m.name}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="flex flex-col items-center gap-2"
-          >
-            <div className="h-16 w-16 sm:h-20 sm:w-24 overflow-hidden rounded-full border-2 border-gold/50 shadow-gold">
-              <img src={m.photo} alt={m.name} className="h-full w-full object-cover" loading="lazy" />
-            </div>
-            <p className="font-body text-[10px] sm:text-xs text-maroon/80 text-center">{m.name}</p>
-            <p className="eyebrow text-[8px] sm:text-[9px] text-bronze/70">{m.relation}</p>
-          </motion.div>
-        ))}
-      </div>
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.5 }}
+        className="mx-auto mt-6 w-full max-w-sm"
+      >
+        <div className="relative aspect-[16/9] overflow-hidden rounded-xl border-2 border-gold/60 bg-maroon/20 p-1.5 shadow-luxury ring-1 ring-gold-light/30">
+          <div className="pointer-events-none absolute inset-2 z-10 rounded-lg border border-gold-light/60" />
+          <img
+            src={data.familyPhoto}
+            alt={`${data.title} family photograph`}
+            className="h-full w-full rounded-lg object-cover"
+            loading="lazy"
+          />
+        </div>
+      </motion.div>
+
     </div>
   )
 }

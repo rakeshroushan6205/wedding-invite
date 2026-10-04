@@ -1,4 +1,4 @@
-# Rakesh & Priya — Luxury Wedding Invitation Website
+# Abhinav & Gauri — Luxury Wedding Invitation Website
 
 A cinematic, royal-feeling wedding invitation site built with React, Vite,
 Tailwind CSS, Framer Motion, and React Three Fiber.
