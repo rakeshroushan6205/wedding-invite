@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { HiOutlineArrowLeft, HiOutlineDownload, HiOutlineShare } from 'react-icons/hi'
 import { couple, events, venue, contact } from '../data/weddingData'
 import InvitationCard from './invitation/InvitationCard'
+import MusicPlayer from './MusicPlayer'
 
 function Petal({ index }) {
   const ref = useRef(null)
@@ -120,7 +121,7 @@ function CornerFlourish({ position, mirror }) {
 
 const weddingEvent = events.find((e) => e.name === 'Wedding Ceremony')
 
-export default function InvitationPage() {
+export default function InvitationPage({ music }) {
   const [showBack, setShowBack] = useState(false)
   const [zoomed, setZoomed] = useState(false)
 
@@ -151,8 +152,10 @@ export default function InvitationPage() {
       exit={{ opacity: 0 }}
       className="relative min-h-screen overflow-hidden"
       style={{ background: 'linear-gradient(160deg, #1a0509 0%, #2B0A12 30%, #42121D 60%, #1a0509 100%)' }}
-    >
-      <svg width="0" height="0">
+      >
+        {music && <MusicPlayer music={music} />}
+
+        <svg width="0" height="0">
         <defs>
           <linearGradient id="petal-grad" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#E6C887" />

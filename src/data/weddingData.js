@@ -80,18 +80,18 @@ export const storyTimeline = [
 
 export const events = [
   {
-    name: 'Mehendi',
-    date: 'Nov 24, 2026',
-    time: '5:00 PM – 8:00 PM',
-    venue: 'Hassanganj Road Mirjanhat Bhagalpur, Bihar',
-    note: 'Colors & traditional attire encouraged',
-  },
-  {
     name: 'Haldi',
     date: 'Nov 24, 2026',
     time: '11:00 AM – 3:00 PM',
     venue: 'Hassanganj Road Mirjanhat Bhagalpur, Bihar',
     note: 'Wear yellow — things will get messy',
+  },
+   {
+    name: 'Mehendi',
+    date: 'Nov 24, 2026',
+    time: '5:00 PM – 8:00 PM',
+    venue: 'Hassanganj Road Mirjanhat Bhagalpur, Bihar',
+    note: 'Colors & traditional attire encouraged',
   },
   {
     name: 'Mandap Pujan',

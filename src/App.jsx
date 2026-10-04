@@ -27,11 +27,10 @@ import useActiveSection from './hooks/useActiveSection'
 import useBackgroundMusic from './hooks/useBackgroundMusic'
 import { couple, heroPoster, music as musicTrack } from './data/weddingData'
 
-function MainPage() {
+function MainPage({ music }) {
   const location = useLocation()
   const sceneControls = useSceneControls()
   const activeSection = useActiveSection()
-  const music = useBackgroundMusic(musicTrack.src)
   const [entered, setEntered] = useState(location.state?.skipEnvelope || false)
 
   if (!entered) {
@@ -86,10 +85,12 @@ function MainPage() {
 }
 
 export default function App() {
+  const music = useBackgroundMusic(musicTrack.src)
+
   return (
     <Routes>
-      <Route path="/invitation" element={<InvitationPage />} />
-      <Route path="*" element={<MainPage />} />
+      <Route path="/invitation" element={<InvitationPage music={music} />} />
+      <Route path="*" element={<MainPage music={music} />} />
     </Routes>
   )
 }

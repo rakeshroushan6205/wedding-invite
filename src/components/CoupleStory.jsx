@@ -40,7 +40,7 @@ export default function CoupleStory() {
                   transition={{ duration: 0.7, ease: 'easeOut' }}
                   className={`overflow-hidden rounded-2xl shadow-luxury ${fromLeft ? 'md:order-1' : 'md:order-2'}`}
                 >
-                  <img src={item.photo} alt={item.title} className="h-48 sm:h-56 md:h-64 w-full object-cover" loading="lazy" />
+                  <img src={item.photo} alt={item.title} className="h-64 sm:h-72 md:h-80 w-full object-cover" loading="lazy" />
                 </motion.div>
 
                 <motion.div
