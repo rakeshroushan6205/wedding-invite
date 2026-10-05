@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { motion } from 'framer-motion'
-import { HiOutlineChevronDown, HiOutlineBookOpen, HiOutlineCalendar } from 'react-icons/hi'
-import { Link } from 'react-router-dom'
+import { AnimatePresence, motion } from 'framer-motion'
+import { HiOutlineArrowLeft, HiOutlineChevronDown, HiOutlineBookOpen, HiOutlineCalendar } from 'react-icons/hi'
 import { couple, heroPoster } from '../data/weddingData'
 import FloatingPetals from './FloatingPetals'
+import InvitationCard from './invitation/InvitationCard'
 import {
   SakuraFlower,
   CherryBlossomBranch,
@@ -76,6 +76,8 @@ function HeartCrystal({ className = '' }) {
 export default function Hero() {
   const [photoOk, setPhotoOk] = useState(true)
   const [isMobile, setIsMobile] = useState(false)
+  const [showInvitation, setShowInvitation] = useState(false)
+  const [showInvitationBack, setShowInvitationBack] = useState(false)
 
   const backRef = useRef(null)
   const midRef = useRef(null)
@@ -86,6 +88,28 @@ export default function Hero() {
   useEffect(() => {
     setIsMobile(window.innerWidth < 768)
   }, [])
+
+  useEffect(() => {
+    if (!showInvitation) return undefined
+
+    const root = document.documentElement
+    const body = document.body
+    const previousRootOverflow = root.style.overflow
+    const previousBodyOverflow = body.style.overflow
+
+    root.style.overflow = 'hidden'
+    body.style.overflow = 'hidden'
+
+    return () => {
+      root.style.overflow = previousRootOverflow
+      body.style.overflow = previousBodyOverflow
+    }
+  }, [showInvitation])
+
+  const openInvitation = () => {
+    setShowInvitationBack(false)
+    setShowInvitation(true)
+  }
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -258,15 +282,51 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.3, duration: 0.7 }}
         >
-          <Link
-            to="/invitation"
+          <button
+            type="button"
+            onClick={openInvitation}
             className="lux-btn mt-7 inline-flex items-center gap-2 rounded-full px-7 py-3 font-body text-xs uppercase tracking-[0.25em] sm:mt-10 sm:px-10 sm:py-3.5 sm:text-sm"
           >
             <HiOutlineBookOpen size={17} />
             View Invitation
-          </Link>
+          </button>
         </motion.div>
       </div>
+
+      <AnimatePresence>
+        {showInvitation && (
+          <motion.div
+            className="fixed inset-0 z-[120] flex items-center justify-center overflow-y-auto bg-maroon/85 px-4 py-10 backdrop-blur-md"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.35 }}
+            onClick={() => setShowInvitation(false)}
+          >
+            <motion.div
+              className="relative flex flex-col items-center"
+              initial={{ opacity: 0, y: 28, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 18, scale: 0.94 }}
+              transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <InvitationCard
+                showBack={showInvitationBack}
+                onFlip={() => setShowInvitationBack((current) => !current)}
+              />
+              <button
+                type="button"
+                onClick={() => setShowInvitation(false)}
+                className="btn-outline-gold mt-5"
+              >
+                <HiOutlineArrowLeft size={15} />
+                Back to Website
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <motion.button
         onClick={() => document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' })}

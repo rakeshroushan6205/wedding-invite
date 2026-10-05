@@ -27,7 +27,7 @@ export default function Footer() {
 
       <div className="flex flex-col items-center gap-2 font-body text-xs sm:text-sm text-ivory/70">
         <p>{contact.email}</p>
-        <p className="text-center">{contact.groomPhone} · {contact.bridePhone}</p>
+        <p className="text-center">{contact.groomPhone}</p>
       </div>
 
       <div className="mt-5 sm:mt-6 flex justify-center gap-5 text-lg sm:text-xl text-gold-light">

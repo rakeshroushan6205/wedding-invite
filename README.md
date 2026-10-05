@@ -122,11 +122,10 @@ services. Each is clearly marked in code with how to upgrade it:
   the browser's `localStorage` by default. Set `VITE_RSVP_ENDPOINT` in a
   `.env` file (copy `.env.example`) to POST real submissions to Formspree, a
   Google Apps Script web app, Airtable, or your own API.
-- **Guest Wishes Wall** (`src/components/WishesWall.jsx`) — wishes persist
-  per-device via `localStorage`, so a guest's own wishes survive a refresh,
-  but aren't shared live with other guests yet. Wire it to Firebase
-  Firestore or Supabase (a few lines in that file) for a real-time shared
-  wall.
+- **Guest Wishes Wall** (`src/components/WishesWall.jsx`) — wishes are shared
+  live through the Firebase Firestore `wishes` collection. If Firestore is
+  unavailable or its rules deny access, the wall falls back to per-device
+  `localStorage`.
 - **Wedding Guide AI assistant** (`src/components/AIAssistant.jsx`) — answers
   questions by matching keywords against the FAQ list in `weddingData.js`,
   entirely client-side (no API key, no cost, no network dependency). To make

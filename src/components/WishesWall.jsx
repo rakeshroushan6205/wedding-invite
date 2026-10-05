@@ -1,33 +1,71 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from 'firebase/firestore'
 import SectionDivider from './SectionDivider'
+import { db } from '../lib/firebase'
 
 const STORAGE_KEY = 'wedding-wishes'
 
-const SEED_WISHES = [
-  { id: 's1', name: 'Aanya', message: 'Wishing you a lifetime of love and laughter! ✨' },
-  { id: 's2', name: 'Arjun', message: 'So happy for you two — see you on the dance floor!' },
-  { id: 's3', name: 'Neha', message: 'May your love story inspire many more. Congratulations!' },
-]
+const SEED_WISHES = []
 
 export default function WishesWall() {
   const [wishes, setWishes] = useState([])
   const [name, setName] = useState('')
   const [message, setMessage] = useState('')
+  const [firebaseStatus, setFirebaseStatus] = useState('loading')
+  const [submitting, setSubmitting] = useState(false)
+
+  const readLocalWishes = () => {
+    try {
+      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null')
+      return stored && stored.length ? stored : SEED_WISHES
+    } catch {
+      return SEED_WISHES
+    }
+  }
 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null')
-    setWishes(stored && stored.length ? stored : SEED_WISHES)
+    const wishesQuery = query(collection(db, 'wishes'), orderBy('createdAt', 'desc'))
+    const unsubscribe = onSnapshot(
+      wishesQuery,
+      (snapshot) => {
+        const liveWishes = snapshot.docs.map((wish) => ({ id: wish.id, ...wish.data() }))
+        const localWishes = readLocalWishes()
+        setWishes(liveWishes.length ? liveWishes : localWishes)
+        setFirebaseStatus('ready')
+      },
+      () => {
+        setWishes(readLocalWishes())
+        setFirebaseStatus('fallback')
+      }
+    )
+
+    return unsubscribe
   }, [])
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault()
     if (!name.trim() || !message.trim()) return
-    const next = [{ id: Date.now().toString(), name: name.trim(), message: message.trim() }, ...wishes]
-    setWishes(next)
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
+
+    const wish = { name: name.trim(), message: message.trim() }
+    const localNext = [{ id: `local-${Date.now()}`, ...wish }, ...readLocalWishes()]
+    setSubmitting(true)
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(localNext))
     setName('')
     setMessage('')
+
+    if (firebaseStatus === 'ready') {
+      try {
+        await addDoc(collection(db, 'wishes'), { ...wish, createdAt: serverTimestamp() })
+        setSubmitting(false)
+        return
+      } catch {
+        setFirebaseStatus('fallback')
+      }
+    }
+
+    setWishes(localNext)
+    setSubmitting(false)
   }
 
   return (
@@ -52,8 +90,8 @@ export default function WishesWall() {
           rows={3}
           className="rounded-lg border border-gold/30 bg-white/60 px-4 py-3 font-body text-maroon placeholder:text-maroon/40 focus:border-gold focus:outline-none"
         />
-        <button type="submit" className="btn-gold w-full sm:w-auto justify-self-stretch sm:justify-self-start">
-          Send Wishes
+        <button type="submit" disabled={submitting} className="btn-gold w-full sm:w-auto justify-self-stretch sm:justify-self-start disabled:cursor-wait disabled:opacity-60">
+          {submitting ? 'Sending…' : 'Send Wishes'}
         </button>
       </form>
 
@@ -85,8 +123,9 @@ export default function WishesWall() {
       </div>
 
       <p className="mx-auto mt-6 sm:mt-8 max-w-xl px-4 text-center font-body text-[10px] sm:text-xs text-maroon/40">
-        Wishes are saved on this device. Connect a service like Firebase or Supabase (see README) to
-        make the wall live and shared across every guest in real time.
+        {firebaseStatus === 'ready'
+          ? 'Wishes are shared live with every guest.'
+          : 'Wishes are saved on this device until the shared wall is available.'}
       </p>
     </section>
   )

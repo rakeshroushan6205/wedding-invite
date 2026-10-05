@@ -62,16 +62,17 @@ section[id], footer[id] {
   color: #FBF6EC;
 }
 
-/* Custom scrollbar */
+/* Keep scrolling available without showing a scrollbar rail. */
 ::-webkit-scrollbar {
-  width: 8px;
+  display: none;
+  width: 0;
+  height: 0;
 }
-::-webkit-scrollbar-track {
-  background: #FBF6EC;
-}
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #E6C887, #C8983E);
-  border-radius: 8px;
+
+html,
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

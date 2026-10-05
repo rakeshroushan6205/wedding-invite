@@ -197,9 +197,9 @@ export const contact = {
 };
 
 export const faqs = [
-  { q: 'What time does the wedding ceremony start?', a: 'The wedding ceremony begins at 7:30 PM on December 12, 2026, at Lake Pichola Lawns, Udaipur.' },
+  { q: 'What time does the wedding ceremony start?', a: 'The wedding ceremony begins at 9:30 PM onward on November 26, 2026, at AmlaDev Palace, Mirjanhat, Bhagalpur, Bihar.' },
   { q: 'What is the dress code?', a: 'Mehendi & Sangeet are festive ethnic wear, Haldi is casual yellow, the Wedding Ceremony calls for traditional attire, and the Reception is black tie / Indo-western.' },
   { q: 'Where is the venue?', a: 'The main ceremony and reception are at AmlaDev Palace, Mirjanhat, Bhagalpur, Bihar.' },
-  { q: 'Who can I contact for help?', a: 'You can reach the groom\u2019s side at +91 70043 63651 or the bride\u2019s side at +91 91234 56789.' },
+  { q: 'Who can I contact for help?', a: 'You can reach the groom\u2019s side at +91 70043 63651.' },
   { q: 'Is there parking / transport available?', a: 'Valet parking is available at the venue, and shuttles will run from partner hotels — details will be shared closer to the date.' },
 ];

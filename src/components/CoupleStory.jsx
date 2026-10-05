@@ -18,7 +18,7 @@ export default function CoupleStory() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-6 font-display text-[clamp(1rem,2.5vw,1.25rem)] italic text-bronze/80"
+          className="mt-6 font-display text-[clamp(1rem,2.5vw,1.25rem)] italic text-maroon"
         >
           <CountUp end={new Date().getFullYear() - FIRST_MEETING_YEAR} duration={1.6} enableScrollSpy scrollSpyOnce />{' '}
           years of love and counting
@@ -50,9 +50,9 @@ export default function CoupleStory() {
                   transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
                   className={`glass-card-dark relative rounded-2xl p-5 sm:p-6 ${fromLeft ? 'md:order-2' : 'md:order-1'}`}
                 >
-                  <span className="section-heading text-3xl sm:text-5xl text-gold/40">{item.year}</span>
-                  <h3 className="section-heading mt-1 text-xl sm:text-2xl text-maroon">{item.title}</h3>
-                  <p className="mt-3 font-body text-sm leading-relaxed text-maroon/70">{item.text}</p>
+                  <span className="section-heading text-3xl sm:text-5xl text-gold-dark/60">{item.year}</span>
+                  <h3 className="section-heading mt-1 text-xl sm:text-2xl text-gold-light">{item.title}</h3>
+                  <p className="mt-3 font-body text-sm leading-relaxed text-maroon">{item.text}</p>
                   <motion.span
                     className="absolute -top-3 right-6 text-2xl text-rosegold"
                     animate={{ scale: [1, 1.25, 1] }}

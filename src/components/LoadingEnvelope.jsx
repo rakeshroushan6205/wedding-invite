@@ -362,19 +362,30 @@ export default function LoadingEnvelope({ onEnter, onMusicStart }) {
           <br />
           and a lifetime of love.
         </p>
-        <p className="ev-invite-copy mt-6">
-          We cordially invite you to celebrate
-          <br />
-          the wedding of
-        </p>
-        <h1 className="ev-invite-name mt-2">{couple.groom}</h1>
-        <p className="ev-invite-with">with</p>
-        <h2 className="ev-invite-name">{couple.bride}</h2>
-        <div className="mt-3 flex items-center gap-3" aria-hidden="true">
-          <span className="h-px w-14 bg-gradient-to-r from-transparent to-[#D6B36A] sm:w-24" />
-          <span className="text-2xl leading-none text-[#E5C98A]">♡</span>
-          <span className="h-px w-14 bg-gradient-to-l from-transparent to-[#D6B36A] sm:w-24" />
-        </div>
+        <motion.div
+          className="flex flex-col items-center overflow-hidden"
+          initial={false}
+          animate={
+            stage === 'closed'
+              ? { opacity: 1, height: 'auto' }
+              : { opacity: 0, height: 0 }
+          }
+          transition={{ duration: 0.55, ease: EASE_LUX }}
+        >
+          <p className="ev-invite-copy mt-6">
+            We cordially invite you to celebrate
+            <br />
+            the wedding of
+          </p>
+          <h1 className="ev-invite-name mt-2">{couple.groom}</h1>
+          <p className="ev-invite-with">with</p>
+          <h2 className="ev-invite-name">{couple.bride}</h2>
+          <div className="mt-3 flex items-center gap-3" aria-hidden="true">
+            <span className="h-px w-14 bg-gradient-to-r from-transparent to-[#D6B36A] sm:w-24" />
+            <span className="text-2xl leading-none text-[#E5C98A]">♡</span>
+            <span className="h-px w-14 bg-gradient-to-l from-transparent to-[#D6B36A] sm:w-24" />
+          </div>
+        </motion.div>
       </motion.div>
 
       {/* ── Envelope ── */}
@@ -496,6 +507,30 @@ export default function LoadingEnvelope({ onEnter, onMusicStart }) {
         </motion.div>
       </div>
 
+      {/* ── Enter button appears directly below the envelope ── */}
+      <div className="ev-enter-slot relative z-10 mt-8 h-11 sm:mt-10 sm:h-12">
+        {showEnter && (
+          <motion.div
+            className="ev-enter-reveal"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+          >
+            <span className="ev-enter-line ev-enter-line-left" aria-hidden="true" />
+            <motion.button
+              onClick={() => onEnter()}
+              initial={{ opacity: 0, y: 18, scale: 0.82, filter: 'blur(10px)' }}
+              animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+              transition={{ duration: 1.1, delay: 0.15, ease: EASE_LUX }}
+              className="btn-gold ev-enter-button"
+            >
+              Enter The Celebration
+            </motion.button>
+            <span className="ev-enter-line ev-enter-line-right" aria-hidden="true" />
+          </motion.div>
+        )}
+      </div>
+
       <motion.div
         className="relative z-10 mt-10 max-w-2xl px-5 text-center sm:mt-14"
         initial={{ opacity: 0, y: 18 }}
@@ -511,38 +546,7 @@ export default function LoadingEnvelope({ onEnter, onMusicStart }) {
           <br className="hidden sm:block" />
           of our lives together.
         </p>
-        <div className="mx-auto mt-6 flex items-center justify-center gap-3" aria-hidden="true">
-          <span className="h-px w-12 bg-gradient-to-r from-transparent to-[#D6B36A] sm:w-20" />
-          <span className="text-xl text-[#E5C98A]">♧</span>
-          <span className="h-px w-12 bg-gradient-to-l from-transparent to-[#D6B36A] sm:w-20" />
-        </div>
-        <div className="ev-save-date mt-5">
-          <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
-            <rect x="7" y="10" width="34" height="31" rx="2" stroke="currentColor" strokeWidth="2" />
-            <path d="M7 18h34M15 6v8M33 6v8M16 27h5M27 27h5M16 34h5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-            <path d="M24 35s-5-2.6-5-6.1a2.8 2.8 0 0 1 5-1.7 2.8 2.8 0 0 1 5 1.7C29 32.4 24 35 24 35Z" stroke="currentColor" strokeWidth="1.7" />
-          </svg>
-          <div>
-            <p className="ev-save-date-title">Save The Date</p>
-            <p className="ev-save-date-value">26 November 2026</p>
-          </div>
-        </div>
       </motion.div>
-
-      {/* ── Enter button appears after the card has risen ── */}
-      <div className="ev-enter-slot relative z-10 mt-8 h-11 sm:mt-10 sm:h-12">
-        {showEnter && (
-          <motion.button
-            onClick={() => onEnter()}
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: EASE_LUX }}
-            className="btn-gold"
-          >
-            Enter The Celebration
-          </motion.button>
-        )}
-      </div>
 
       {stage === 'closed' && (
         <motion.p
