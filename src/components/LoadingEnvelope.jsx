@@ -296,7 +296,7 @@ export default function LoadingEnvelope({ onEnter, onMusicStart }) {
 
   return (
     <motion.div
-      className="ev-screen fixed inset-0 z-[200] flex flex-col items-center justify-center overflow-hidden px-6"
+      className="ev-screen fixed inset-0 z-[200] flex flex-col items-center justify-start overflow-x-hidden overflow-y-auto px-6"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.9, ease: 'easeOut' }}
@@ -344,26 +344,41 @@ export default function LoadingEnvelope({ onEnter, onMusicStart }) {
       <CornerOrnament className="pointer-events-none absolute bottom-3 right-3 w-14 rotate-180 opacity-60 sm:bottom-6 sm:right-6 sm:w-20" />
       <CornerOrnament className="pointer-events-none absolute bottom-3 left-3 w-14 -rotate-90 opacity-60 sm:bottom-6 sm:left-6 sm:w-20" />
 
-      {/* ── Date (gently collapses once opened so the risen card
-             always has room and is never cropped) ── */}
+      {/* ── Invitation heading ── */}
       <motion.div
-        className="relative z-10 overflow-hidden"
-        initial={false}
-        animate={opened ? { opacity: 0, height: 0 } : { opacity: 1, height: 'auto' }}
-        transition={{ duration: 0.6, ease: EASE_LUX }}
+        className="relative z-10 flex w-full max-w-2xl flex-col items-center text-center"
+        initial={{ opacity: 0, y: 18 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.25, duration: 0.9, ease: EASE_LUX }}
       >
-        <motion.p {...fade(0.25)} className="ev-date text-[clamp(0.8rem,2.6vw,1.05rem)] font-medium">
-           26 November 2026
-        </motion.p>
-        <motion.div {...fade(0.4)} className="mt-3 flex items-center gap-3" aria-hidden="true">
-          <span className="h-px w-10 bg-gradient-to-r from-transparent to-[#D6B36A]/70 sm:w-16" />
-          <span className="h-1 w-1 rotate-45 bg-[#D6B36A]" />
-          <span className="h-px w-10 bg-gradient-to-l from-transparent to-[#D6B36A]/70 sm:w-16" />
-        </motion.div>
+        <p className="ev-invite-kicker">Together Forever</p>
+        <div className="mt-4 flex items-center gap-3" aria-hidden="true">
+          <span className="h-px w-14 bg-gradient-to-r from-transparent to-[#D6B36A] sm:w-24" />
+          <span className="text-lg text-[#E5C98A]">♥</span>
+          <span className="h-px w-14 bg-gradient-to-l from-transparent to-[#D6B36A] sm:w-24" />
+        </div>
+        <p className="ev-invite-lede mt-3">
+          Two hearts, one journey...
+          <br />
+          and a lifetime of love.
+        </p>
+        <p className="ev-invite-copy mt-6">
+          We cordially invite you to celebrate
+          <br />
+          the wedding of
+        </p>
+        <h1 className="ev-invite-name mt-2">{couple.groom}</h1>
+        <p className="ev-invite-with">with</p>
+        <h2 className="ev-invite-name">{couple.bride}</h2>
+        <div className="mt-3 flex items-center gap-3" aria-hidden="true">
+          <span className="h-px w-14 bg-gradient-to-r from-transparent to-[#D6B36A] sm:w-24" />
+          <span className="text-2xl leading-none text-[#E5C98A]">♡</span>
+          <span className="h-px w-14 bg-gradient-to-l from-transparent to-[#D6B36A] sm:w-24" />
+        </div>
       </motion.div>
 
       {/* ── Envelope ── */}
-      <div ref={envWrapRef} className="ev-scene relative z-10 mt-10 will-change-transform sm:mt-12">
+      <div ref={envWrapRef} className="ev-scene relative z-10 mt-9 will-change-transform sm:mt-12">
         <motion.div
           initial={{ opacity: 0, scale: 0.93 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -481,8 +496,41 @@ export default function LoadingEnvelope({ onEnter, onMusicStart }) {
         </motion.div>
       </div>
 
+      <motion.div
+        className="relative z-10 mt-10 max-w-2xl px-5 text-center sm:mt-14"
+        initial={{ opacity: 0, y: 18 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.9, duration: 0.8, ease: EASE_LUX }}
+      >
+        <p className="ev-invite-message">
+          Your presence will make our special day
+          <br />
+          even more meaningful. We would be delighted
+          <br className="hidden sm:block" />
+          to have you with us as we begin this beautiful new chapter
+          <br className="hidden sm:block" />
+          of our lives together.
+        </p>
+        <div className="mx-auto mt-6 flex items-center justify-center gap-3" aria-hidden="true">
+          <span className="h-px w-12 bg-gradient-to-r from-transparent to-[#D6B36A] sm:w-20" />
+          <span className="text-xl text-[#E5C98A]">♧</span>
+          <span className="h-px w-12 bg-gradient-to-l from-transparent to-[#D6B36A] sm:w-20" />
+        </div>
+        <div className="ev-save-date mt-5">
+          <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <rect x="7" y="10" width="34" height="31" rx="2" stroke="currentColor" strokeWidth="2" />
+            <path d="M7 18h34M15 6v8M33 6v8M16 27h5M27 27h5M16 34h5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            <path d="M24 35s-5-2.6-5-6.1a2.8 2.8 0 0 1 5-1.7 2.8 2.8 0 0 1 5 1.7C29 32.4 24 35 24 35Z" stroke="currentColor" strokeWidth="1.7" />
+          </svg>
+          <div>
+            <p className="ev-save-date-title">Save The Date</p>
+            <p className="ev-save-date-value">26 November 2026</p>
+          </div>
+        </div>
+      </motion.div>
+
       {/* ── Enter button appears after the card has risen ── */}
-      <div className="ev-enter-slot relative z-10 mt-10 h-11 sm:h-12">
+      <div className="ev-enter-slot relative z-10 mt-8 h-11 sm:mt-10 sm:h-12">
         {showEnter && (
           <motion.button
             onClick={() => onEnter()}
@@ -496,16 +544,13 @@ export default function LoadingEnvelope({ onEnter, onMusicStart }) {
         )}
       </div>
 
-      {/* ── Bottom instruction ── */}
-      {stage === 'closed' ? (
-        <motion.div {...fade(1.25)} className="ev-subtitle relative z-10 mt-6 flex flex-col items-center sm:mt-8">
-          <p className="ev-open-label text-[clamp(0.66rem,2vw,0.8rem)] font-medium">Open The Invitation</p>
-          <p className="mt-2 font-display text-sm italic text-ivory/70 sm:text-base">
-            A story written in love <span className="ev-heartbeat ml-1 text-rosegold">&#10084;</span>
-          </p>
-        </motion.div>
-      ) : (
-        <div className="ev-subtitle mt-6 h-14 sm:h-16" aria-hidden="true" />
+      {stage === 'closed' && (
+        <motion.p
+          {...fade(1.25)}
+          className="ev-open-label relative z-10 mt-6 pb-8 text-center text-[clamp(0.66rem,2vw,0.8rem)] font-medium sm:mt-8"
+        >
+          Open The Invitation
+        </motion.p>
       )}
     </motion.div>
   )

@@ -85,6 +85,7 @@ export const events = [
     time: '11:00 AM – 3:00 PM',
     venue: 'Hassanganj Road Mirjanhat Bhagalpur, Bihar',
     note: 'Wear yellow — things will get messy',
+    photo: '/media/gallery/wedding/Haldi.jpeg',
   },
    {
     name: 'Mehendi',
@@ -92,6 +93,7 @@ export const events = [
     time: '5:00 PM – 8:00 PM',
     venue: 'Hassanganj Road Mirjanhat Bhagalpur, Bihar',
     note: 'Colors & traditional attire encouraged',
+    photo: '/media/gallery/wedding/Mehendi.jpeg',
   },
   {
     name: 'Mandap Pujan',
@@ -99,6 +101,7 @@ export const events = [
     time: '6:00 PM – 11:00 PM',
     venue: 'Hassanganj Road Mirjanhat Bhagalpur, Bihar',
     note: 'Festive evening wear',
+    photo: '/media/gallery/wedding/Mandap%20Pujan.jpeg',
   },
   {
     name: 'Barat Departure',
@@ -106,6 +109,7 @@ export const events = [
     time: '7:00 PM – 11:00 PM',
     venue: 'Hassanganj Road Mirjanhat Bhagalpur, Bihar',
     note: 'Traditional / Indo-western attire',
+    photo: '/media/gallery/wedding/Barat%20Departure.jpeg',
   },
    {
     name: 'Wedding Ceremony & Dinner',
@@ -113,6 +117,7 @@ export const events = [
     time: '9:30 PM onward',
     venue: 'AmlaDev Palace, Mirjanhat, Bhagalpur, Bihar',
     note: 'Traditional ceremonial attire',
+    photo: '/media/gallery/wedding/Wedding%20Ceremony.png',
   }
 ];
 

@@ -1,15 +1,7 @@
 import { motion } from 'framer-motion'
-import { HiOutlineCalendar, HiOutlineClock, HiOutlineLocationMarker } from 'react-icons/hi'
 import { events } from '../data/weddingData'
 import SectionDivider from './SectionDivider'
-
-const ICONS = {
-  Mehendi: '/media/gallery/icon/Mehendi.png',
-  Haldi: '/media/gallery/icon/Haldi.png',
-  'Mandap Pujan': '/media/gallery/icon/Mandap%20Pujan.png',
-  'Barat Departure': '/media/gallery/icon/Barat%20Departure.png',
-  'Wedding Ceremony & Dinner': '/media/gallery/icon/Wedding-Ceremony-Dinner.png',
-}
+import EventPhoto from './EventPhoto'
 
 export default function EventSchedule() {
   return (
@@ -21,47 +13,19 @@ export default function EventSchedule() {
       </div>
 
       <div className="mx-auto mt-10 sm:mt-16 grid max-w-6xl gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {events.map((ev, i) => {
-          const icon = ICONS[ev.name]
-          return (
-            <motion.div
-              key={ev.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.55, delay: i * 0.08 }}
-              whileHover={{ y: -8 }}
-              className="glass-card relative overflow-hidden rounded-2xl p-5 pt-7 sm:p-7 sm:pt-8 shadow-luxury"
-            >
-              <div
-                className="absolute inset-x-0 top-0 h-[3px]"
-                style={{ background: 'linear-gradient(90deg, transparent, #E6C887 30%, #C8983E 50%, #E6C887 70%, transparent)' }}
-                aria-hidden="true"
-              />
-              <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-gold/10" />
-              <div className="flex h-12 w-12 items-center justify-center rounded-full border border-gold/40 bg-gradient-to-br from-gold/20 to-rosegold/10 shadow-gold">
-                <img src={icon} alt="" className="h-9 w-9 object-contain" loading="lazy" />
-              </div>
-              <h3 className="section-heading mt-4 text-xl sm:text-2xl text-maroon">{ev.name}</h3>
-
-              <div className="mt-4 space-y-2 font-body text-sm text-maroon/75">
-                <p className="flex items-center gap-2">
-                  <HiOutlineCalendar className="shrink-0 text-gold" /> {ev.date}
-                </p>
-                <p className="flex items-center gap-2">
-                  <HiOutlineClock className="shrink-0 text-gold" /> {ev.time}
-                </p>
-                <p className="flex items-center gap-2">
-                  <HiOutlineLocationMarker className="shrink-0 text-gold" /> {ev.venue}
-                </p>
-              </div>
-
-              <p className="mt-4 border-t border-gold/20 pt-3 font-display text-sm italic text-bronze/80">
-                {ev.note}
-              </p>
-            </motion.div>
-          )
-        })}
+        {events.map((ev, i) => (
+          <motion.div
+            key={ev.name}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.55, delay: i * 0.08 }}
+            whileHover={{ y: -8 }}
+            className="group overflow-hidden rounded-2xl shadow-luxury"
+          >
+            <EventPhoto src={ev.photo} alt={`${ev.name} invitation`} />
+          </motion.div>
+        ))}
       </div>
     </section>
   )

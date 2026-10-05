@@ -9,11 +9,91 @@
   min-height: 100dvh; /* mobile browser chrome aware */
   padding-top: max(clamp(20px, 4vh, 48px), env(safe-area-inset-top));
   padding-bottom: max(clamp(20px, 4vh, 48px), env(safe-area-inset-bottom));
+  background-color: #32000d;
   background:
-    radial-gradient(ellipse 90% 60% at 50% 38%, rgba(122, 52, 66, 0.35) 0%, rgba(58, 13, 24, 0) 60%),
-    linear-gradient(165deg, rgba(36, 7, 15, 0.86) 0%, rgba(48, 11, 23, 0.78) 48%, rgba(36, 7, 15, 0.88) 100%),
-    url('/media/couple/Couple%20Photo_3_Background.png') center / auto 88% no-repeat,
-    linear-gradient(165deg, #24070f 0%, #300b17 48%, #24070f 100%);
+    radial-gradient(ellipse 75% 42% at 50% 35%, rgba(126, 27, 49, 0.28) 0%, rgba(50, 0, 13, 0) 68%),
+    linear-gradient(165deg, #26000a 0%, #430012 48%, #28000b 100%);
+}
+
+.ev-invite-kicker {
+  color: #e5c98a;
+  font-family: 'Jost', sans-serif;
+  font-size: clamp(0.68rem, 2vw, 0.9rem);
+  font-weight: 500;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  text-indent: 0.5em;
+  text-shadow: 0 0 18px rgba(214, 179, 106, 0.35);
+}
+
+.ev-invite-lede,
+.ev-invite-message {
+  color: #e5c98a;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.05rem, 3.6vw, 1.45rem);
+  font-style: italic;
+  line-height: 1.35;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.ev-invite-copy {
+  color: #f3dfb1;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.1rem, 3.8vw, 1.6rem);
+  line-height: 1.35;
+}
+
+.ev-invite-name {
+  color: #f0cb77;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.2rem, 12vw, 6.2rem);
+  font-style: italic;
+  font-weight: 600;
+  line-height: 0.78;
+  text-shadow: 0 0 22px rgba(231, 199, 123, 0.3), 0 3px 12px rgba(0, 0, 0, 0.5);
+}
+
+.ev-invite-with {
+  color: #e5c98a;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  font-style: italic;
+  line-height: 1;
+}
+
+.ev-invite-message {
+  font-size: clamp(1rem, 3.3vw, 1.35rem);
+  line-height: 1.45;
+}
+
+.ev-save-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  color: #f0cb77;
+  text-align: left;
+}
+
+.ev-save-date svg {
+  width: clamp(2.75rem, 9vw, 4rem);
+  height: clamp(2.75rem, 9vw, 4rem);
+  flex: 0 0 auto;
+}
+
+.ev-save-date-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 6vw, 3rem);
+  font-style: italic;
+  line-height: 0.9;
+}
+
+.ev-save-date-value {
+  margin-top: 0.45rem;
+  color: #f3dfb1;
+  font-family: 'Jost', sans-serif;
+  font-size: clamp(0.65rem, 2vw, 0.9rem);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
 }
 
 /* radial champagne glow behind the envelope */
