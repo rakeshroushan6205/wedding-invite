@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react'
 
 const COLORS = ['#FF6B8A', '#FFD93D', '#6BCBFF', '#C084FC', '#FF9F43']
 
-function Butterfly({ color, index }) {
+function Butterfly({ color }) {
   const ref = useRef(null)
   const pos = useRef({
     x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth - 80 : 400),
@@ -92,7 +92,7 @@ export default function FlyingButterflies() {
   return (
     <>
       {COLORS.map((c, i) => (
-        <Butterfly key={i} color={c} index={i} />
+        <Butterfly key={i} color={c} />
       ))}
     </>
   )

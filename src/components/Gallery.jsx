@@ -1,12 +1,7 @@
 import { useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { HiOutlineX, HiOutlineChevronLeft, HiOutlineChevronRight } from 'react-icons/hi'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
-import { galleryImages, galleryVideos } from '../data/weddingData'
+import { galleryImages } from '../data/weddingData'
 import SectionDivider from './SectionDivider'
 
 function TiltCard({ src, onClick, index }) {
@@ -66,26 +61,6 @@ export default function Gallery() {
           <TiltCard key={src} src={src} index={i} onClick={setActiveIndex} />
         ))}
       </div>
-
-      {galleryVideos.length > 0 && (
-        <div className="mx-auto mt-12 sm:mt-16 max-w-5xl px-0 sm:px-4">
-          <p className="eyebrow mb-6 text-center text-bronze">Pre-Wedding Films</p>
-          <Swiper
-            modules={[Navigation, Pagination]}
-            navigation
-            pagination={{ clickable: true }}
-            spaceBetween={12}
-            slidesPerView={1}
-            breakpoints={{ 640: { slidesPerView: 2, spaceBetween: 20 } }}
-          >
-            {galleryVideos.map((src) => (
-              <SwiperSlide key={src}>
-                <video src={src} controls className="aspect-video w-full rounded-xl shadow-luxury" />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
-      )}
 
       <AnimatePresence>
         {activeIndex !== null && (

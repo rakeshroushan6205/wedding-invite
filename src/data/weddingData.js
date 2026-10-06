@@ -6,22 +6,17 @@
 export const couple = {
   groom: 'Abhinav',
   bride: 'Gauri',
-groomFull: 'Abhinav Kumar',
-  brideFull: 'Gauri Kushwaha',
   weddingDate: '2026-11-26T10:00:00',
-  weddingDateDisplay: 'November 26, 2026', 
+  weddingDateDisplay: 'November 26, 2026',
   city: 'Bhagalpur, Bihar',
   hashtag: '#AbhinavWedsGauri',
 };
 
-export const heroVideo = '/media/video/hero-bg.mp4';
 // Background photo used behind the website content.
 export const heroPoster = '/media/couple/Couple Photo_3_Background.png';
-//'/audio/Chanakya%20By%20Rishabh%20Sharma.mp3'
 
 export const music = {
   src: '/audio/Chanakya%20By%20Rishabh%20Sharma.mp3',
-  title: 'Chanakya By Rishabh Sharma',
 };
 
 export const familyIntro = {
@@ -81,42 +76,22 @@ export const storyTimeline = [
 export const events = [
   {
     name: 'Haldi',
-    date: 'Nov 24, 2026',
-    time: '11:00 AM – 3:00 PM',
-    venue: 'Hassanganj Road Mirjanhat Bhagalpur, Bihar',
-    note: 'Wear yellow — things will get messy',
     photo: '/media/gallery/wedding/Haldi.jpeg',
   },
    {
     name: 'Mehendi',
-    date: 'Nov 24, 2026',
-    time: '5:00 PM – 8:00 PM',
-    venue: 'Hassanganj Road Mirjanhat Bhagalpur, Bihar',
-    note: 'Colors & traditional attire encouraged',
     photo: '/media/gallery/wedding/Mehendi.jpeg',
   },
   {
     name: 'Mandap Pujan',
-    date: 'Nov 25, 2026',
-    time: '6:00 PM – 11:00 PM',
-    venue: 'Hassanganj Road Mirjanhat Bhagalpur, Bihar',
-    note: 'Festive evening wear',
     photo: '/media/gallery/wedding/Mandap%20Pujan.jpeg',
   },
   {
     name: 'Barat Departure',
-    date: 'Nov 26, 2026',
-    time: '7:00 PM – 11:00 PM',
-    venue: 'Hassanganj Road Mirjanhat Bhagalpur, Bihar',
-    note: 'Traditional / Indo-western attire',
     photo: '/media/gallery/wedding/Barat%20Departure.jpeg',
   },
    {
     name: 'Wedding Ceremony & Dinner',
-    date: 'Nov 26, 2026',
-    time: '9:30 PM onward',
-    venue: 'AmlaDev Palace, Mirjanhat, Bhagalpur, Bihar',
-    note: 'Traditional ceremonial attire',
     photo: '/media/gallery/wedding/Wedding%20Ceremony.png',
   }
 ];
@@ -177,17 +152,6 @@ export const carouselPhotos = [
   '/media/gallery/celebration-06.jpg',
   '/media/gallery/celebration-07.jpg',
 ];
-
-export const galleryVideos = [
-  // Add direct mp4 urls or local /media/gallery/video-1.mp4 paths here.
-];
-
-export const giftInfo = {
-  upiId: 'abhinavgauri@upi',
-  qrImage: '/media/qr-code.png',
-  message:
-    'Your presence is the only gift we need. For those who insist, a contribution toward our new home would be cherished.',
-};
 
 export const contact = {
   groomPhone: '+91 70043 63651',

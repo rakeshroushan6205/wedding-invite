@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { createPortal } from 'react-dom'
+import { motion } from 'framer-motion'
 import { HiOutlineArrowLeft, HiOutlineChevronDown, HiOutlineBookOpen, HiOutlineCalendar } from 'react-icons/hi'
 import { couple, heroPoster } from '../data/weddingData'
 import FloatingPetals from './FloatingPetals'
@@ -293,40 +294,37 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      <AnimatePresence>
-        {showInvitation && (
+      {showInvitation && createPortal(
+        <motion.div
+          className="fixed inset-0 z-[120] flex items-start justify-center overflow-y-auto bg-maroon/85 px-4 py-10 backdrop-blur-md sm:items-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.35 }}
+          onClick={() => setShowInvitation(false)}
+        >
           <motion.div
-            className="fixed inset-0 z-[120] flex items-center justify-center overflow-y-auto bg-maroon/85 px-4 py-10 backdrop-blur-md"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.35 }}
-            onClick={() => setShowInvitation(false)}
+            className="relative flex flex-col items-center"
+            initial={{ opacity: 0, y: 28, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            onClick={(e) => e.stopPropagation()}
           >
-            <motion.div
-              className="relative flex flex-col items-center"
-              initial={{ opacity: 0, y: 28, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 18, scale: 0.94 }}
-              transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-              onClick={(e) => e.stopPropagation()}
+            <InvitationCard
+              showBack={showInvitationBack}
+              onFlip={() => setShowInvitationBack((current) => !current)}
+            />
+            <button
+              type="button"
+              onClick={() => setShowInvitation(false)}
+              className="btn-outline-gold mt-5"
             >
-              <InvitationCard
-                showBack={showInvitationBack}
-                onFlip={() => setShowInvitationBack((current) => !current)}
-              />
-              <button
-                type="button"
-                onClick={() => setShowInvitation(false)}
-                className="btn-outline-gold mt-5"
-              >
-                <HiOutlineArrowLeft size={15} />
-                Back to Website
-              </button>
-            </motion.div>
+              <HiOutlineArrowLeft size={15} />
+              Back to Website
+            </button>
           </motion.div>
-        )}
-      </AnimatePresence>
+        </motion.div>,
+        document.body
+      )}
 
       <motion.button
         onClick={() => document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' })}

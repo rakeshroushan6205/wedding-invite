@@ -66,7 +66,6 @@ function GlowOrbs() {
 
 function getCardStyle(offset, arcRadius) {
   const abs = Math.abs(offset)
-  const sign = Math.sign(offset) || 1
   const arcAngle = offset * ARC_ANGLE
 
   return {

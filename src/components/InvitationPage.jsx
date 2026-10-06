@@ -2,11 +2,11 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { HiOutlineArrowLeft, HiOutlineDownload, HiOutlineShare } from 'react-icons/hi'
-import { couple, events, venue, contact } from '../data/weddingData'
+import { couple } from '../data/weddingData'
 import InvitationCard from './invitation/InvitationCard'
 import MusicPlayer from './MusicPlayer'
 
-function Petal({ index }) {
+function Petal() {
   const ref = useRef(null)
   const style = useRef({
     left: Math.random() * 100,
@@ -43,7 +43,7 @@ function Petal({ index }) {
   )
 }
 
-function FloatingOrb({ index, color }) {
+function FloatingOrb({ color }) {
   const x = useRef(10 + Math.random() * 80)
   const y = useRef(10 + Math.random() * 80)
   const duration = useRef(8 + Math.random() * 10)
@@ -65,7 +65,7 @@ function FloatingOrb({ index, color }) {
   )
 }
 
-function SparkleParticle({ index }) {
+function SparkleParticle() {
   const style = useRef({
     left: Math.random() * 100,
     top: Math.random() * 100,
@@ -119,8 +119,6 @@ function CornerFlourish({ position, mirror }) {
   )
 }
 
-const weddingEvent = events.find((e) => e.name === 'Wedding Ceremony')
-
 export default function InvitationPage({ music }) {
   const [showBack, setShowBack] = useState(false)
   const [zoomed, setZoomed] = useState(false)
@@ -164,16 +162,16 @@ export default function InvitationPage({ music }) {
         </defs>
       </svg>
 
-      <FloatingOrb index={0} color="rgba(200,152,62,0.12)" />
-      <FloatingOrb index={1} color="rgba(217,168,160,0.08)" />
-      <FloatingOrb index={2} color="rgba(200,152,62,0.06)" />
+      <FloatingOrb color="rgba(200,152,62,0.12)" />
+      <FloatingOrb color="rgba(217,168,160,0.08)" />
+      <FloatingOrb color="rgba(200,152,62,0.06)" />
 
       {Array.from({ length: typeof window !== 'undefined' && window.innerWidth < 640 ? 10 : 20 }).map((_, i) => (
-        <Petal key={i} index={i} />
+        <Petal key={i} />
       ))}
 
       {Array.from({ length: typeof window !== 'undefined' && window.innerWidth < 640 ? 15 : 30 }).map((_, i) => (
-        <SparkleParticle key={i} index={i} />
+        <SparkleParticle key={i} />
       ))}
 
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-maroon-light/20 to-maroon/40 pointer-events-none" />

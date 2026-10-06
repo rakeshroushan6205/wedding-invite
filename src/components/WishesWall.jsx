@@ -30,8 +30,12 @@ export default function WishesWall() {
       wishesQuery,
       (snapshot) => {
         const liveWishes = snapshot.docs.map((wish) => ({ id: wish.id, ...wish.data() }))
-        const localWishes = readLocalWishes()
-        setWishes(liveWishes.length ? liveWishes : localWishes)
+        if (liveWishes.length) {
+          setWishes(liveWishes)
+        } else {
+          localStorage.removeItem(STORAGE_KEY)
+          setWishes([])
+        }
         setFirebaseStatus('ready')
       },
       () => {

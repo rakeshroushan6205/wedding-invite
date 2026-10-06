@@ -1,9 +1,6 @@
 import { motion } from 'framer-motion'
-import CountUp from 'react-countup'
 import { storyTimeline } from '../data/weddingData'
 import SectionDivider from './SectionDivider'
-
-const FIRST_MEETING_YEAR = Number(storyTimeline[0]?.year) || new Date().getFullYear()
 
 export default function CoupleStory() {
   return (
@@ -12,17 +9,6 @@ export default function CoupleStory() {
         <p className="eyebrow text-bronze">Their Journey</p>
         <h2 className="section-heading mt-3 text-[clamp(1.75rem,5vw,3rem)] text-maroon">A Love Story</h2>
         <SectionDivider className="mt-6" />
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-6 font-display text-[clamp(1rem,2.5vw,1.25rem)] italic text-maroon"
-        >
-          <CountUp end={new Date().getFullYear() - FIRST_MEETING_YEAR} duration={1.6} enableScrollSpy scrollSpyOnce />{' '}
-          years of love and counting
-        </motion.p>
       </div>
 
       <div className="relative mx-auto mt-12 sm:mt-16 max-w-4xl">
@@ -50,7 +36,6 @@ export default function CoupleStory() {
                   transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
                   className={`glass-card-dark relative rounded-2xl p-5 sm:p-6 ${fromLeft ? 'md:order-2' : 'md:order-1'}`}
                 >
-                  <span className="section-heading text-3xl sm:text-5xl text-gold-dark/60">{item.year}</span>
                   <h3 className="section-heading mt-1 text-xl sm:text-2xl text-gold-light">{item.title}</h3>
                   <p className="mt-3 font-body text-sm leading-relaxed text-maroon">{item.text}</p>
                   <motion.span

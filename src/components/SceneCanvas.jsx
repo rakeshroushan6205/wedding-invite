@@ -4,52 +4,24 @@ import { Float, Sparkles, MeshDistortMaterial } from '@react-three/drei'
 import * as THREE from 'three'
 
 const MOODS = {
-  hero:        { ambient: '#F3DCD4', aI: 0.55, p: '#E6C887', s: '#E6C887', bokeh: '#FBF6EC', stars: false },
-  experience:  { ambient: '#F3DCD4', aI: 0.50, p: '#E6C887', s: '#E6C887', bokeh: '#FBF6EC', stars: false },
-  story:       { ambient: '#E8F0E8', aI: 0.55, p: '#D4A574', s: '#E8D5B5', bokeh: '#F5E6CC', stars: false },
-  countdown:   { ambient: '#1A1A3E', aI: 0.35, p: '#C8983E', s: '#E6C887', bokeh: '#FBF6EC', stars: true },
-  events:      { ambient: '#E8D5B5', aI: 0.50, p: '#C8983E', s: '#E6C887', bokeh: '#F5E6CC', stars: false },
-  gallery:     { ambient: '#E8E0D8', aI: 0.50, p: '#C8983E', s: '#E6C887', bokeh: '#FBF6EC', stars: false },
-  films:       { ambient: '#1A0A12', aI: 0.30, p: '#C8983E', s: '#E6C887', bokeh: '#D9A8A0', stars: true },
-  venue:       { ambient: '#D8E8D0', aI: 0.55, p: '#C8983E', s: '#E6C887', bokeh: '#F5E6CC', stars: false },
-  family:      { ambient: '#F0E8D8', aI: 0.50, p: '#C8983E', s: '#E6C887', bokeh: '#FBF6EC', stars: false },
-  rsvp:        { ambient: '#F5F0E8', aI: 0.55, p: '#C8983E', s: '#E6C887', bokeh: '#FBF6EC', stars: false },
-  wishes:      { ambient: '#F0E8E0', aI: 0.50, p: '#C8983E', s: '#E6C887', bokeh: '#D9A8A0', stars: false },
-  finale:      { ambient: '#E8C8D0', aI: 0.50, p: '#E6C887', s: '#E6C887', bokeh: '#FBF6EC', stars: false },
-  footer:      { ambient: '#1A1A3E', aI: 0.35, p: '#E6C887', s: '#E6C887', bokeh: '#FBF6EC', stars: true },
+  hero:        { ambient: '#F3DCD4', aI: 0.55, stars: false },
+  experience:  { ambient: '#F3DCD4', aI: 0.50, stars: false },
+  story:       { ambient: '#E8F0E8', aI: 0.55, stars: false },
+  countdown:   { ambient: '#1A1A3E', aI: 0.35, stars: true },
+  events:      { ambient: '#E8D5B5', aI: 0.50, stars: false },
+  gallery:     { ambient: '#E8E0D8', aI: 0.50, stars: false },
+  films:       { ambient: '#1A0A12', aI: 0.30, stars: true },
+  venue:       { ambient: '#D8E8D0', aI: 0.55, stars: false },
+  family:      { ambient: '#F0E8D8', aI: 0.50, stars: false },
+  rsvp:        { ambient: '#F5F0E8', aI: 0.55, stars: false },
+  wishes:      { ambient: '#F0E8E0', aI: 0.50, stars: false },
+  finale:      { ambient: '#E8C8D0', aI: 0.50, stars: false },
+  footer:      { ambient: '#1A1A3E', aI: 0.35, stars: true },
 }
 
 const DEFAULT_MOOD = MOODS.hero
 
-export function GlowRing({ position, scale = 1, speed = 1, color = '#E6C887', rotation = [Math.PI / 2.4, 0, 0] }) {
-  return (
-    <Float speed={speed} rotationIntensity={0.6} floatIntensity={1.4}>
-      <mesh position={position} scale={scale} rotation={rotation}>
-        <torusGeometry args={[1, 0.05, 32, 100]} />
-        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={1.8} metalness={0.95} roughness={0.15} />
-      </mesh>
-    </Float>
-  )
-}
-
-export function InterlockedRings({ position = [0, 0.4, -1.5], scale = 1 }) {
-  return (
-    <Float speed={0.5} rotationIntensity={0.3} floatIntensity={0.9}>
-      <group position={position} scale={scale}>
-        <mesh rotation={[Math.PI / 2.2, 0, 0]} position={[-0.45, 0, 0]}>
-          <torusGeometry args={[1, 0.065, 32, 120]} />
-          <meshStandardMaterial color="#E6C887" emissive="#E6C887" emissiveIntensity={2.6} metalness={0.95} roughness={0.12} />
-        </mesh>
-        <mesh rotation={[Math.PI / 2.2, 0.4, 0]} position={[0.45, -0.05, 0.15]}>
-          <torusGeometry args={[1, 0.065, 32, 120]} />
-          <meshStandardMaterial color="#E9B9AF" emissive="#D9A8A0" emissiveIntensity={2.2} metalness={0.95} roughness={0.15} />
-        </mesh>
-      </group>
-    </Float>
-  )
-}
-
-export function Diamond({ position, scale = 0.22, speed = 1 }) {
+function Diamond({ position, scale = 0.22, speed = 1 }) {
   return (
     <Float speed={speed} rotationIntensity={1.6} floatIntensity={2}>
       <mesh position={position} scale={scale}>
@@ -60,7 +32,7 @@ export function Diamond({ position, scale = 0.22, speed = 1 }) {
   )
 }
 
-export function Rose({ position, scale = 1, speed = 1 }) {
+function Rose({ position, scale = 1, speed = 1 }) {
   const petals = 6
   return (
     <Float speed={speed} rotationIntensity={0.4} floatIntensity={1.8}>
@@ -83,11 +55,7 @@ export function Rose({ position, scale = 1, speed = 1 }) {
   )
 }
 
-function PetalParticle({ petalRef, index }) {
-  return null
-}
-
-function FallingPetals({ count = 40, color = '#E8B8AE', activeSection }) {
+function FallingPetals({ count = 40, color = '#E8B8AE' }) {
   const meshRef = useRef(null)
   const data = useMemo(() => {
     const temp = []
@@ -137,7 +105,7 @@ function FallingPetals({ count = 40, color = '#E8B8AE', activeSection }) {
   )
 }
 
-function Butterflies({ count = 6, mood }) {
+function Butterflies({ count = 6 }) {
   const groupRef = useRef(null)
   const data = useMemo(() => {
     const temp = []
@@ -271,7 +239,6 @@ function WeddingArch() {
 
 function AmbientMoodLights({ moodData }) {
   const ambientRef = useRef(null)
-  const pointRefs = useRef([])
 
   useFrame(() => {
     const m = moodData.current
@@ -325,11 +292,11 @@ function SceneContents({ controls, moodData, reduced = false }) {
           <Sparkles count={160} scale={[14, 10, 12]} size={2.4} speed={0.4} color="#E6C887" opacity={0.7} />
           <Sparkles count={40} scale={[10, 8, 10]} size={4} speed={0.25} color="#FBF6EC" opacity={0.45} />
 
-          <FallingPetals count={24} color="#E8B8AE" activeSection="" />
-          <Butterflies count={5} mood="" />
+          <FallingPetals count={24} color="#E8B8AE" />
+          <Butterflies count={5} />
           <BokehLights count={25} color="#FBF6EC" />
-          <Stars count={400} />
-          <Moon />
+          {m.stars && <Stars count={400} />}
+          {m.stars && <Moon />}
         </>
       )}
 
@@ -362,13 +329,7 @@ export default function SceneCanvas({ controls, activeSection = 'hero', classNam
     return () => mq.removeEventListener('change', handler)
   }, [])
 
-  const targetMood = MOODS[activeSection] || DEFAULT_MOOD
-  const prevKeys = Object.keys(targetMood)
-  prevKeys.forEach((k) => {
-    if (typeof targetMood[k] === 'string' && targetMood[k] !== moodRef.current[k]) {
-    }
-  })
-  moodRef.current = targetMood
+  moodRef.current = MOODS[activeSection] || DEFAULT_MOOD
 
   return (
     <div className={`pointer-events-none ${className}`} aria-hidden="true">

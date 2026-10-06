@@ -24,7 +24,7 @@ npm run preview   # preview the production build locally
 Almost everything you'll want to change lives in **`src/data/weddingData.js`**:
 couple names, wedding date, the couple's story, event schedule (Mehendi,
 Haldi, Sangeet, Ceremony, Reception), venue + map, gallery photos, wedding
-films, family members, gift/UPI details, contact info, and the FAQ list
+films, family members, contact info, and the FAQ list
 used by the "Wedding Guide" chat widget. Edit that one file and the whole
 site updates.
 
@@ -67,17 +67,10 @@ Add your own films by dropping `.mp4` files into
 that array; until real files are added, each thumbnail doubles as the video
 poster so nothing looks broken.
 
-The masonry **Gallery** section also supports short video clips via the
-`galleryVideos` array in the same data file, shown in a small Swiper
-carousel beneath the photo grid — handy for quick behind-the-scenes clips
-alongside the main films above.
-
 ## 4. Music
 
-A short, original instrumental theme (`public/audio/wedding-theme.mp3`,
-~24s, loops seamlessly) is included by default — synthesized from scratch
-for this project, so there are no licensing concerns. Swap it for a real
-track any time by replacing that file (or pointing `music.src` in
+A background track (`public/audio/Chanakya By Rishabh Sharma.mp3`) is included
+by default. Swap it for a real track any time by replacing that file (or pointing `music.src` in
 `weddingData.js` at a new path) — no other code changes needed.
 
 Playback starts the instant the guest taps **"Enter The Celebration"** on
@@ -93,12 +86,10 @@ widget in the corner controls that same shared audio instance.
 Drop your files into `public/` and they'll be picked up automatically
 (see `public/media/README.txt` for the exact paths):
 
-- `public/media/video/hero-bg.mp4` — the fullscreen hero video
 - `public/media/video/films/*.mp4` — the Wedding Films showcase
-- `public/media/gallery/*` — gallery photos & video clips
+- `public/media/gallery/*` — gallery photos
 - `public/media/family/*`, `public/media/couple/*` — your own photos
-- `public/media/qr-code.png` — your UPI QR code image
-- `public/audio/wedding-theme.mp3` — background music (already included)
+- `public/audio/Chanakya By Rishabh Sharma.mp3` — background music (already included)
 
 Until you add these, the site uses elegant Unsplash placeholder images so it
 looks complete out of the box.
@@ -161,7 +152,6 @@ src/
     FamilySection.jsx
     RSVPForm.jsx
     WishesWall.jsx
-    GiftSection.jsx
     FinaleSection.jsx        ← scroll-triggered confetti finale
     Footer.jsx
     MusicPlayer.jsx          ← presentational controls only

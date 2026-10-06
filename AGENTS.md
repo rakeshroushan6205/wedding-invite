@@ -8,14 +8,14 @@
 
 ## Content
 Everything in `src/data/weddingData.js`:
-- couple names, date, story, events, venues, gallery photos, films, family, FAQ, gift/UPI, music source
+- couple names, date, story, events, venues, gallery photos, films, family, FAQ, contact, music source
 - `carouselPhotos` controls the 3D carousel (defaults to first 6 gallery images)
 - `galleryImages` and `films` use Unsplash placeholders
 
 ## Media files
 Drop into `public/media/`:
-- `video/hero-bg.mp4`, `video/films/*.mp4`, `gallery/*`, `family/*`, `couple/*`, `qr-code.png`
-- `audio/wedding-theme.mp3` — background music (included)
+- `video/films/*.mp4`, `gallery/*`, `family/*`, `couple/*`
+- `audio/Chanakya By Rishabh Sharma.mp3` — background music (included)
 
 ## 3D Background Architecture
 `SceneCanvas.jsx` — full-screen R3F canvas behind all sections:
@@ -52,4 +52,4 @@ Each section has unique lighting/particle mood defined in `MOODS`:
 - 3D bg uses `dpr={[1, 1.5]}` for mobile perf
 - Countdown shows "Forever Has Begun" when date is past
 - `useActiveSection` relies on `id` attributes on each section element
-- `GlowRing`, `InterlockedRings`, `Diamond`, `Rose` exported from `SceneCanvas.jsx`
+- `Diamond` and `Rose` are internal decorative components in `SceneCanvas.jsx`
